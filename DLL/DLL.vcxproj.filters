@@ -18,12 +18,18 @@
     <ClInclude Include="API.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Klasa.h">
+    <ClInclude Include="Test.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TextSplitter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Klasa.cpp">
+    <ClCompile Include="Test.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TextSplitter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
