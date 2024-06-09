@@ -2,45 +2,23 @@
 
 Button::Button() {}
 
-Button::Button(std::string text, sf::Vector2f size, sf::Color bgColor, sf::Color outColor, sf::Color textColor) {
-
-	m_text.setString(text);
-	m_text.setFillColor(textColor);
-	m_text.setCharacterSize(30);
-
+Button::Button(sf::Vector2f size, sf::Color bgColor, sf::Color outColor) {
 	m_button.setSize(size);
 	m_button.setFillColor(bgColor);
-
-}
-
-void Button::setFont(sf::Font& font) {
-	m_text.setFont(font);
+	m_button.setOutlineColor(outColor);
+	m_button.setOutlineThickness(-1);
 }
 
 void Button::setBackColor(sf::Color color) {
 	m_button.setFillColor(color);
 }
 
-void Button::setTextColor(sf::Color color) {
-	m_text.setFillColor(color);
-}
-
 void Button::setPosition(sf::Vector2f pos) {
 	m_button.setPosition(pos);
-
-	float xPos = (pos.x + (m_button.getGlobalBounds().width / 2) - (m_text.getGlobalBounds().width / 2));
-	float yPos = (pos.y + (m_button.getGlobalBounds().height / 2) - (m_text.getGlobalBounds().height / 2));
-
-	m_text.setPosition({  xPos, yPos});
 }
 
 void Button::draw(sf::RenderWindow& window) {
 	window.draw(m_button);
-	window.draw(m_text);
-}
-
-sf::RectangleShape Button::getButton() {
-	return m_button;
 }
 
 bool Button::isMouseOver(sf::RenderWindow& window) {

@@ -22,9 +22,8 @@ void SpeedReader::loop() {
 
 	sf::Font arial;
 	arial.loadFromFile("arial.ttf");
-	Button btn1 = Button("load", { 100,25 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(0, 0, 0, 200));
+	Button btn1 = Button({ 100,25 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255));
 	btn1.setPosition({ 25,400 });
-	btn1.setFont(arial);
 
 	//sf::RectangleShape btn;
 	//btn.setSize({ 100,25 });

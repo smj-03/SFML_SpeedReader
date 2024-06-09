@@ -138,6 +138,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Button.cpp" />
+    <ClCompile Include="TextButton.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ProgramState.h" />
     <ClCompile Include="SpeedReader.cpp" />
@@ -147,6 +148,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Button.h" />
+    <ClInclude Include="TextButton.h" />
     <ClInclude Include="SpeedReader.h" />
     <ClInclude Include="TextSplitter.h" />
   </ItemGroup>

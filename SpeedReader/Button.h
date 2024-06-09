@@ -1,17 +1,13 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
-class  Button {
+class Button {
 public:
 	Button();
 
-	Button(std::string text, sf::Vector2f size, sf::Color bgColor, sf::Color outColor, sf::Color textColor);
-
-	void setFont(sf::Font& font);
+	Button(sf::Vector2f size, sf::Color bgColor, sf::Color outColor);
 
 	void setBackColor(sf::Color color);
-
-	void setTextColor(sf::Color color);
 
 	void setPosition(sf::Vector2f pos);
 
@@ -19,10 +15,7 @@ public:
 
 	bool isMouseOver(sf::RenderWindow& window);
 
-	sf::RectangleShape getButton();
-
-private:
+protected:
 
 	sf::RectangleShape m_button;
-	sf::Text m_text;
 };
