@@ -138,6 +138,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="TextDisplay.cpp" />
+    <ClCompile Include="TextDisplay.h" />
     <ClCompile Include="TextSplitter.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -1,6 +1,8 @@
-﻿  main.cpp
-P:\project\SpeedReader\SpeedReader\main.cpp(59,33): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-P:\project\SpeedReader\SpeedReader\main.cpp(104,36): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+﻿  Scanning sources for module dependencies...
+  main.cpp
+P:\project\SpeedReader\SpeedReader\main.cpp(29,11): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+P:\project\SpeedReader\SpeedReader\main.cpp(57,33): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+P:\project\SpeedReader\SpeedReader\main.cpp(102,36): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   SpeedReader.vcxproj -> P:\project\SpeedReader\x64\Debug\SpeedReader.exe
   P:\project\SpeedReader\x64\Debug\SpeedReader.exe
           1 file(s) copied.

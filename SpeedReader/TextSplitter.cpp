@@ -1,9 +1,10 @@
 #include "TextSplitter.h"
 #include <sstream>
+#include <locale>
 
-TextSplitter::TextSplitter(std::string text) : _text(text) {
-	std::istringstream stream(text);
-	std::string word;
+TextSplitter::TextSplitter(std::wstring text) : _text(text) {
+	std::wistringstream stream(text);
+	std::wstring word;
 
 	while (stream >> word)
 		_words.push_back(word);
