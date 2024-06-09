@@ -4,24 +4,32 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
 #include "TextSplitter.h"
+#include <locale.h>
+#include <windows.h>
 
 int main() {
 	//Test test;
 	//test.test();
+	std::locale::global(std::locale("en_US.UTF-8"));
+	SetConsoleOutputCP(CP_UTF8);
 
-	std::string text = "razjjj dyywa trzy cztery pięc szesc siedem osiem dziewiec dziesiec Tego, Ygwdwd";
-	TextSplitter ts = TextSplitter(text);
-	wordList words = ts.getWords();
-	//for (auto& word : words) {
-	//	std::cout << word << std::endl;
+	//std::string text = "razjjj dy\20ywa trzy cztery pięc szesc siedem osiem dziewiec dziesiec Tego, Ygwdwd";
+	//TextSplitter ts = TextSplitter(text);
+	//wordList words = ts.getWords();
+	////for (auto& word : words) {
+	////	std::cout << word << std::endl;
+	////}
+	//wordGroups groups = ts.splitText(3);
+	//for (auto& group : groups) {
+	//	for (auto& word : group) {
+	//		std::cout << word << " ";
+	//	}
+	//	std::wcout << std::endl;
 	//}
-	wordGroups groups = ts.splitText(3);
-	for (auto& group : groups) {
-		for (auto& word : group) {
-			std::cout << word << " ";
-		}
-		std::cout << std::endl;
-	}
+
+	std::wstring words[] = { L"Zażółć", L"Gęślą", L"Jaźń" };
+	int size = sizeof(words) / sizeof(words[0]);
+	std::cout << size;
 
 
 	sf::RenderWindow window(sf::VideoMode(800, 450), "SFML", sf::Style::Titlebar | sf::Style::Close);
@@ -44,12 +52,8 @@ int main() {
 	sfText.setCharacterSize(50);
 	sfText.setFillColor(sf::Color::Black);
 
-	//casting to int to make text look sharp
-	std::cout << sfText.getGlobalBounds().getSize().x << " " << sfText.getGlobalBounds().getSize().y << std::endl;
-	std::cout << sfText.getLocalBounds().getPosition().x << " " << sfText.getLocalBounds().getPosition().y << std::endl;
 
 	auto textBounds = (sf::Vector2f)((sf::Vector2i)(sfText.getGlobalBounds().getSize() / 2.f + sfText.getLocalBounds().getPosition()));
-	std::cout << textBounds.x << " " << textBounds.y << std::endl;
 
 	int height = sfText.getCharacterSize()*3/4;
 	sfText.setOrigin(textBounds.x, height);
@@ -81,7 +85,6 @@ int main() {
 
 	sf::Clock timer;
 	int i = 0;
-	std::cout << words.size() << std::endl;
 
 	while (window.isOpen()) {
 		sf::Event event;
@@ -93,12 +96,11 @@ int main() {
 
 		window.clear(sf::Color::White);
 
-		if (i < words.size() - 1) {
-			if (timer.getElapsedTime().asMilliseconds() >= 200) {
+		if (i < size - 1) {
+			if (timer.getElapsedTime().asMilliseconds() >= 1000) {
 				i += 1;
 				sfText.setString(words[i]);
 				auto textBounds = (sf::Vector2f)((sf::Vector2i)(sfText.getGlobalBounds().getSize() / 2.f + sfText.getLocalBounds().getPosition()));
-				std::cout << textBounds.x << " " << textBounds.y << std::endl;
 				sfText.setOrigin(textBounds.x, height);
 				sfText.setPosition((sf::Vector2f)intDisplayPos);
 				timer.restart();
