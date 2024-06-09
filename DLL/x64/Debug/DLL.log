@@ -1,20 +1,9 @@
-﻿  TextSplitter.cpp
-P:\project\SpeedReader\DLL\TextSplitter.h(11,14): warning C4251: 'TextSplitter::_text': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of class 'TextSplitter'
-  (compiling source file 'TextSplitter.cpp')
-  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\include\xstring(2337,7):
-  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
-  
-P:\project\SpeedReader\DLL\TextSplitter.h(13,11): warning C4251: 'TextSplitter::_words': class 'std::vector<std::string,std::allocator<std::string>>' needs to have dll-interface to be used by clients of class 'TextSplitter'
-  (compiling source file 'TextSplitter.cpp')
-  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\include\vector(436,7):
-  see declaration of 'std::vector<std::string,std::allocator<std::string>>'
-  
+﻿  LINK : P:\project\SpeedReader\x64\Debug\DLL.dll not found or not built by the last incremental link; performing full link
      Creating library P:\project\SpeedReader\x64\Debug\DLL.lib and object P:\project\SpeedReader\x64\Debug\DLL.exp
   DLL.vcxproj -> P:\project\SpeedReader\x64\Debug\DLL.dll
   P:\project\SpeedReader\DLL\API.h
   P:\project\SpeedReader\DLL\Test.h
-  P:\project\SpeedReader\DLL\TextSplitter.h
-          3 file(s) copied.
+          2 file(s) copied.
   P:\project\SpeedReader\x64\Debug\DLL.dll
   P:\project\SpeedReader\x64\Debug\sfml-audio-d-2.dll
   P:\project\SpeedReader\x64\Debug\sfml-graphics-d-2.dll
@@ -23,4 +12,5 @@ P:\project\SpeedReader\DLL\TextSplitter.h(13,11): warning C4251: 'TextSplitter::
   P:\project\SpeedReader\x64\Debug\sfml-window-d-2.dll
           6 file(s) copied.
   P:\project\SpeedReader\x64\Debug\DLL.lib
-          1 file(s) copied.
+  P:\project\SpeedReader\x64\Debug\SpeedReader.lib
+          2 file(s) copied.

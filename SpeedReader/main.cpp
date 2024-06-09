@@ -1,9 +1,9 @@
 #include "Test.h"
-#include "TextSplitter.h"
 #include <cstdio>
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
+#include "TextSplitter.h"
 
 int main() {
 	//Test test;
@@ -34,7 +34,7 @@ int main() {
 		std::cout << "DUPA" << std::endl;
 	}
 	sftext.setFont(font);
-	sftext.setString(words[0]);
+	sftext.setString("Test");
 	sftext.setCharacterSize(20);
 	sftext.setFillColor(sf::Color::White);
 	sftext.move(0,0);
