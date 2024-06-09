@@ -2,22 +2,31 @@
 #include <string>
 #include <vector>
 
-typedef std::vector<std::wstring> wordList;
-typedef std::vector<wordList> wordGroups;
+typedef std::wstring text;
+typedef std::vector<text> wordList;
 class TextSplitter {
 private:
 
-	std::wstring _text;
+	text _text;
 
-	wordList _words;
+	wordList _chunks;
+
+	int _chunkSize;
 
 public:
 
-	TextSplitter(std::wstring text);
+	TextSplitter();
 
-	wordList getWords();
+	TextSplitter(text text);
 
-	wordGroups splitText(int chunkSize);
+	void setText(text text);
 
+	text getText();
+
+	wordList getChunks();
+	
+	void chunkText();
+
+	void chunkText(int chunkSize);
 
 };

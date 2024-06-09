@@ -1,8 +1,5 @@
 ﻿  Scanning sources for module dependencies...
-  TextDisplay.cpp
-P:\project\SpeedReader\SpeedReader\TextDisplay.cpp(10,37): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-P:\project\SpeedReader\SpeedReader\TextDisplay.cpp(26,67): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-P:\project\SpeedReader\SpeedReader\TextDisplay.cpp(33,31): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  SpeadReader.cpp
   SpeedReader.vcxproj -> P:\project\SpeedReader\x64\Debug\SpeedReader.exe
   P:\project\SpeedReader\x64\Debug\SpeedReader.exe
           1 file(s) copied.

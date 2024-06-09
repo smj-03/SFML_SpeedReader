@@ -2,35 +2,54 @@
 #include <sstream>
 #include <locale>
 
-TextSplitter::TextSplitter(std::wstring text) : _text(text) {
-	std::wistringstream stream(text);
+TextSplitter::TextSplitter() : _chunkSize(1) {};
+
+TextSplitter::TextSplitter(text text) : _text(text), _chunkSize(1) {};
+
+void TextSplitter::setText(text text) {
+	_text = text;
+};
+
+text TextSplitter::getText() {
+	return _text;
+}
+
+wordList TextSplitter::getChunks() {
+	return _chunks;
+}
+
+void TextSplitter::chunkText() {
+	_chunkSize = 1;
+	std::wistringstream stream(_text);
 	std::wstring word;
 
 	while (stream >> word)
-		_words.push_back(word);
-
+		_chunks.push_back(word);
 }
 
-wordList TextSplitter::getWords() {
-	return _words;
-}
+void TextSplitter::chunkText(int chunkSize) {
+	chunkText();
+	_chunkSize = chunkSize;
+	wordList chunks;
 
-wordGroups TextSplitter::splitText(int chunkSize) {
-	wordGroups wordGroups;
 
 	int count = 0;
-	wordList group;
-	for (auto& word : _words) {
-		group.push_back(word);
+	text temp = L"";
+	for (auto& word : _chunks) {
+		if (count > 0 && count < chunkSize) 
+			temp += L" ";
+		temp += word;
 		count++;
 
-		if (!(count % chunkSize)) {
-			wordGroups.push_back(group);
-			group.clear();
+		if (count == chunkSize) {
+			chunks.push_back(temp);
+			temp = L"";
+			count = 0;
 		}
 	}
-	if(chunkSize != 1)
-		wordGroups.push_back(group);
 
-	return wordGroups;
+	if (count > 0)
+		chunks.push_back(temp);
+
+	_chunks = chunks;
 }

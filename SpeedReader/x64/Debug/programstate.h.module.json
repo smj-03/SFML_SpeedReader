@@ -1,0 +1,22 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "x64\\Debug\\ProgramState.h.obj",
+            "outputs": [
+                "P:\\project\\SpeedReader\\SpeedReader\\x64\\Debug\\vc143.pdb",
+                "x64\\Debug\\",
+                "P:\\project\\SpeedReader\\SpeedReader\\x64\\Debug\\ProgramState.h.ifc"
+            ],
+            "provides": [
+                {
+                    "logical-name": "ProgramState.h",
+                    "source-path": "p:\\project\\speedreader\\speedreader\\programstate.h",
+                    "lookup-method": "absolute"
+                }
+            ],
+            "requires": []
+        }
+    ]
+}
