@@ -35,9 +35,15 @@ int main() {
 	}
 	sftext.setFont(font);
 	sftext.setString("Test");
-	sftext.setCharacterSize(20);
-	sftext.setFillColor(sf::Color::White);
-	sftext.move(0,0);
+	sftext.setCharacterSize(50);
+	sftext.setFillColor(sf::Color::Black);
+	sftext.setPosition(350, 270);
+
+	sf::RectangleShape display(sf::Vector2f(600, 300));
+	display.setFillColor(sf::Color::Color(220, 220, 220, 100));
+	display.setPosition(100, 150);
+	display.setOutlineColor(sf::Color::Color(190, 190, 190, 190));
+	display.setOutlineThickness(1);
 
 	while (window.isOpen()) {
 		sf::Event event;
@@ -46,6 +52,9 @@ int main() {
 				window.close();
 			}
 		}
+
+		window.clear(sf::Color::White);
+		window.draw(display);
 		window.draw(sftext);
 		window.display();
 	}
