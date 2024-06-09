@@ -24,6 +24,8 @@ public:
 	text getText();
 
 	wordList getChunks();
+
+	int getChunkSize();
 	
 	void chunkText();
 

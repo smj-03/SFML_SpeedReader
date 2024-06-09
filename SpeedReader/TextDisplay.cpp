@@ -1,12 +1,10 @@
 #include "TextDisplay.h"
 
 TextDisplay::TextDisplay() {
-	_isTextLoaded = false;
 	_isPaused = false;
 	_wordListSize = 0;
 	_currentIndex = 0;
-	_wordsPerMinute = 500;
-	_interval = 60.0 / _wordsPerMinute * 1000.0;
+	_wordsPerMinute = 200;
 
 	_background.setSize(sf::Vector2f(750, 350));
 	_background.setPosition(25, 25);
@@ -26,15 +24,11 @@ void TextDisplay::centerText() {
 	_word.setPosition(400, 200);
 }
 
-void TextDisplay::loadText(wordList wordList) {
+void TextDisplay::loadText(TextSplitter& splitter) {
 	// if size == 0 throw error
-	_wordList = wordList;
-	_wordListSize = wordList.size();
-	_isTextLoaded = true;
-}
-
-bool TextDisplay::isTextLoaded() {
-	return _isTextLoaded;
+	_wordList = splitter.getChunks();
+	_wordListSize = _wordList.size();
+	_chunkSize = splitter.getChunkSize();
 }
 
 sf::Text TextDisplay::getWord() {
@@ -48,7 +42,7 @@ sf::RectangleShape TextDisplay::getBackground() {
 void TextDisplay::calculateWord(sf::Clock& timer) {
 	_word.setString(_wordList[_currentIndex]);
 	centerText();
-	if (timer.getElapsedTime().asMilliseconds() >= _interval && _currentIndex < (_wordListSize - 1)) {
+	if (timer.getElapsedTime().asMilliseconds() >= (60.0 / _wordsPerMinute * 1000.0 * _chunkSize) && _currentIndex < (_wordListSize - 1)) {
 		_currentIndex++;
 		timer.restart();
 	}

@@ -18,6 +18,10 @@ wordList TextSplitter::getChunks() {
 	return _chunks;
 }
 
+int TextSplitter::getChunkSize() {
+	return _chunkSize;
+}
+
 void TextSplitter::chunkText() {
 	_chunkSize = 1;
 	std::wistringstream stream(_text);

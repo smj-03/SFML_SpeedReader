@@ -5,8 +5,10 @@ SpeedReader::SpeedReader(){
 	//_display.loadText({ L"Welcome to Speed Reader!" });
 	_text = L"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tincidunt orci ac sem lacinia laoreet. Sed quis aliquet libero. Nam ac tortor in eros condimentum accumsan. Aenean eleifend mi semper, faucibus est id, iaculis libero. Vestibulum laoreet nunc nec elit vehicula, vel varius augue rhoncus. Ut non auctor massa. Nulla.";
 	_splitter.setText(_text);
-	_splitter.chunkText(1);
-	_display.loadText(_splitter.getChunks());
+
+	// Do zrobienia zeby duze chunki sie miescily
+	_splitter.chunkText(2);
+	_display.loadText(_splitter);
 	_timer.restart();
 	_programState = ProgramState::MainDisplay;
 }
@@ -41,7 +43,7 @@ void SpeedReader::loop() {
 			_text = L"Dupa dupa dupa";
 			_splitter.setText(_text);
 			_splitter.chunkText(1);
-			_display.loadText(_splitter.getChunks());
+			_display.loadText(_splitter);
 			_programState = ProgramState::MainDisplay;
 
 			break;

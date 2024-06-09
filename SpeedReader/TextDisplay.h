@@ -1,5 +1,6 @@
 #pragma once 
 #include <SFML/Graphics.hpp>
+#include "TextSplitter.h"
 
 typedef std::vector<std::wstring> wordList;
 class TextDisplay {
@@ -26,7 +27,7 @@ private:
 
 	int _wordListSize;
 
-	bool _isTextLoaded;
+	int _chunkSize;
 
 	bool _isPaused;
 
@@ -36,11 +37,9 @@ public:
 
 	TextDisplay();
 
-	void loadText(wordList wordList);
+	void loadText(TextSplitter& splitter);
 
 	void calculateWord(sf::Clock& timer);
-
-	bool isTextLoaded();
 
 	sf::Text getWord();
 

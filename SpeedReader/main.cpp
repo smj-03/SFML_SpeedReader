@@ -8,7 +8,7 @@ int main() {
 	
 	text text = L"raz dwa trzy";
 	TextSplitter splitter(text);
-	splitter.chunkText(3);
+	splitter.chunkText(5);
 	auto chunks = splitter.getChunks();
 	for (auto& word : chunks) {
 		std::wcout << word << std::endl;
