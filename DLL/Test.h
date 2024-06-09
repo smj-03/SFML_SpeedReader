@@ -4,8 +4,8 @@
 
 class EXPORT_API Test {
 private:
-
+	sf::RectangleShape m_button;
 public: 
-
 	void test();
+	sf::RectangleShape getButton();
 };

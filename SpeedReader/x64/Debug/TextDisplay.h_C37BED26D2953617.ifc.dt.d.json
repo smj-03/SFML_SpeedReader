@@ -196,7 +196,8 @@
             "p:\\sfml-2.6.1\\include\\sfml\\graphics\\glsl.inl",
             "p:\\sfml-2.6.1\\include\\sfml\\graphics\\sprite.hpp",
             "p:\\sfml-2.6.1\\include\\sfml\\graphics\\text.hpp",
-            "p:\\sfml-2.6.1\\include\\sfml\\graphics\\vertexbuffer.hpp"
+            "p:\\sfml-2.6.1\\include\\sfml\\graphics\\vertexbuffer.hpp",
+            "p:\\project\\speedreader\\speedreader\\textsplitter.h"
         ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []

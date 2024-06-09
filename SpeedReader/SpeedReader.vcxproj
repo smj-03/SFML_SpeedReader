@@ -137,14 +137,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ProgramState.h" />
-    <ClCompile Include="SpeadReader.cpp" />
+    <ClCompile Include="SpeedReader.cpp" />
     <ClCompile Include="TextDisplay.cpp" />
     <ClCompile Include="TextDisplay.h" />
     <ClCompile Include="TextSplitter.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Button.h" />
     <ClInclude Include="SpeedReader.h" />
     <ClInclude Include="TextSplitter.h" />
   </ItemGroup>
