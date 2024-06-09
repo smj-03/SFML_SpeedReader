@@ -25,25 +25,29 @@ int main() {
 
 	sf::RenderWindow window(sf::VideoMode(800, 450), "SFML");
 
+	sf::RectangleShape display(sf::Vector2f(750, 350));
+	display.setPosition(25, 25);
+	display.setFillColor(sf::Color::Color(220, 220, 220, 100));
+	display.setOutlineColor(sf::Color::Color(190, 190, 190, 190));
+	display.setOutlineThickness(-1);
 
-	sf::Text sftext;
+	sf::Text sfText;
 	sf::Font font;
 
 	if (!font.loadFromFile("arial.ttf"))
 	{
 		std::cout << "DUPA" << std::endl;
 	}
-	sftext.setFont(font);
-	sftext.setString("Test");
-	sftext.setCharacterSize(50);
-	sftext.setFillColor(sf::Color::Black);
-	sftext.setPosition(350, 180);
+	sfText.setFont(font);
+	sfText.setString("Test12425125125125");
+	sfText.setCharacterSize(50);
+	sfText.setFillColor(sf::Color::Black);
 
-	sf::RectangleShape display(sf::Vector2f(750, 350));
-	display.setPosition(25, 25);
-	display.setFillColor(sf::Color::Color(220, 220, 220, 100));
-	display.setOutlineColor(sf::Color::Color(190, 190, 190, 190));
-	display.setOutlineThickness(-1);
+	//casting to int to make text look sharp
+	sfText.setOrigin((sf::Vector2f)((sf::Vector2i)(sfText.getGlobalBounds().getSize() / 2.f + sfText.getLocalBounds().getPosition())));
+	auto displayPos = display.getPosition() + (display.getSize() / 2.f);
+	sf::Vector2i intDisplayPos = (sf::Vector2i)displayPos;
+	sfText.setPosition((sf::Vector2f)intDisplayPos);
 
 	sf::RectangleShape button(sf::Vector2f(100, 25));
 	button.setPosition(25, 400);
@@ -76,7 +80,7 @@ int main() {
 		window.draw(button);
 		window.draw(button2);
 		window.draw(button3);
-		window.draw(sftext);
+		window.draw(sfText);
 		window.display();
 	}
 
