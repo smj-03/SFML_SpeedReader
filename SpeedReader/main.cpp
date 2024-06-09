@@ -1,4 +1,4 @@
-#include "Test.h"
+﻿#include "Test.h"
 #include <cstdio>
 #include <iostream>
 #include <SFML/Graphics.hpp>
@@ -9,7 +9,7 @@ int main() {
 	//Test test;
 	//test.test();
 
-	std::string text = "raz dwa trzy cztery piec";
+	std::string text = "razjjj dyywa trzy cztery pięc szesc siedem osiem dziewiec dziesiec Tego, Ygwdwd";
 	TextSplitter ts = TextSplitter(text);
 	wordList words = ts.getWords();
 	//for (auto& word : words) {
@@ -23,7 +23,8 @@ int main() {
 		std::cout << std::endl;
 	}
 
-	sf::RenderWindow window(sf::VideoMode(800, 450), "SFML");
+
+	sf::RenderWindow window(sf::VideoMode(800, 450), "SFML", sf::Style::Titlebar | sf::Style::Close);
 
 	sf::RectangleShape display(sf::Vector2f(750, 350));
 	display.setPosition(25, 25);
@@ -39,15 +40,26 @@ int main() {
 		std::cout << "DUPA" << std::endl;
 	}
 	sfText.setFont(font);
-	sfText.setString("Test12425125125125");
+	sfText.setString(words[0]);
 	sfText.setCharacterSize(50);
 	sfText.setFillColor(sf::Color::Black);
 
 	//casting to int to make text look sharp
-	sfText.setOrigin((sf::Vector2f)((sf::Vector2i)(sfText.getGlobalBounds().getSize() / 2.f + sfText.getLocalBounds().getPosition())));
+	std::cout << sfText.getGlobalBounds().getSize().x << " " << sfText.getGlobalBounds().getSize().y << std::endl;
+	std::cout << sfText.getLocalBounds().getPosition().x << " " << sfText.getLocalBounds().getPosition().y << std::endl;
+
+	auto textBounds = (sf::Vector2f)((sf::Vector2i)(sfText.getGlobalBounds().getSize() / 2.f + sfText.getLocalBounds().getPosition()));
+	std::cout << textBounds.x << " " << textBounds.y << std::endl;
+
+	int height = sfText.getCharacterSize()*3/4;
+	sfText.setOrigin(textBounds.x, height);
 	auto displayPos = display.getPosition() + (display.getSize() / 2.f);
 	sf::Vector2i intDisplayPos = (sf::Vector2i)displayPos;
 	sfText.setPosition((sf::Vector2f)intDisplayPos);
+
+	sf::CircleShape point(2,10);
+	point.setPosition((sf::Vector2f)intDisplayPos);
+	point.setFillColor(sf::Color::Red);
 
 	sf::RectangleShape button(sf::Vector2f(100, 25));
 	button.setPosition(25, 400);
@@ -67,6 +79,10 @@ int main() {
 	button3.setOutlineColor(sf::Color::Color(190, 190, 190, 190));
 	button3.setOutlineThickness(-1);
 
+	sf::Clock timer;
+	int i = 0;
+	std::cout << words.size() << std::endl;
+
 	while (window.isOpen()) {
 		sf::Event event;
 		while (window.pollEvent(event)) {
@@ -76,6 +92,20 @@ int main() {
 		}
 
 		window.clear(sf::Color::White);
+
+		if (i < words.size() - 1) {
+			if (timer.getElapsedTime().asMilliseconds() >= 200) {
+				i += 1;
+				sfText.setString(words[i]);
+				auto textBounds = (sf::Vector2f)((sf::Vector2i)(sfText.getGlobalBounds().getSize() / 2.f + sfText.getLocalBounds().getPosition()));
+				std::cout << textBounds.x << " " << textBounds.y << std::endl;
+				sfText.setOrigin(textBounds.x, height);
+				sfText.setPosition((sf::Vector2f)intDisplayPos);
+				timer.restart();
+			}
+		}
+
+		window.draw(point);
 		window.draw(display);
 		window.draw(button);
 		window.draw(button2);

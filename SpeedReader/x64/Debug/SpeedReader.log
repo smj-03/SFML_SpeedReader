@@ -1,4 +1,7 @@
 ﻿  main.cpp
+P:\project\SpeedReader\SpeedReader\main.cpp(12,21): warning C4566: character represented by universal-character-name '\u0119' cannot be represented in the current code page (1252)
+P:\project\SpeedReader\SpeedReader\main.cpp(55,33): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+P:\project\SpeedReader\SpeedReader\main.cpp(102,36): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   SpeedReader.vcxproj -> P:\project\SpeedReader\x64\Debug\SpeedReader.exe
   P:\project\SpeedReader\x64\Debug\SpeedReader.exe
           1 file(s) copied.
