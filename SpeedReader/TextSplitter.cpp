@@ -29,7 +29,8 @@ wordGroups TextSplitter::splitText(int chunkSize) {
 			group.clear();
 		}
 	}
-	wordGroups.push_back(group);
+	if(chunkSize != 1)
+		wordGroups.push_back(group);
 
 	return wordGroups;
 }

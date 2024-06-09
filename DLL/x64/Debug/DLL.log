@@ -1,4 +1,4 @@
-﻿  LINK : P:\project\SpeedReader\x64\Debug\DLL.dll not found or not built by the last incremental link; performing full link
+﻿  Test.cpp
      Creating library P:\project\SpeedReader\x64\Debug\DLL.lib and object P:\project\SpeedReader\x64\Debug\DLL.exp
   DLL.vcxproj -> P:\project\SpeedReader\x64\Debug\DLL.dll
   P:\project\SpeedReader\DLL\API.h
