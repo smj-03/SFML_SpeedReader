@@ -1,6 +1,4 @@
 ﻿#include "SpeedReader.h"
-#include "SpriteButton.h"
-#include "TextButton.h"
 #include <iostream>
 
 SpeedReader::SpeedReader() {
@@ -53,6 +51,13 @@ void SpeedReader::loop() {
 	sPauseButton.setSpriteColor(sf::Color::Color(0, 0, 0, 160));
 	sPauseButton.setPosition({ 220, 400 });
 
+	sf::Texture settingsIcon;
+	if (!settingsIcon.loadFromFile("icons/setting-icon.png")) {
+		std::cout << "pupa";
+	}
+	SpriteButton settingsButton = SpriteButton(settingsIcon, { 0.75, 0.75 }, { 25, 25 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255));
+	settingsButton.setSpriteColor(sf::Color::Color(0, 0, 0, 160));
+	settingsButton.setPosition({ 750, 400 });
 
 
 	while (_window.isOpen()) {
@@ -73,6 +78,7 @@ void SpeedReader::loop() {
 			sPlayButton.draw(_window);
 			sPauseButton.draw(_window);
 			sResetButton.draw(_window);
+			settingsButton.draw(_window);
 
 			if (!_display.isPaused())
 				_display.calculateWord(_timer);
@@ -80,14 +86,11 @@ void SpeedReader::loop() {
 
 			if (event.type == sf::Event::MouseMoved) {
 
-				if (textButton.isMouseOver(_window)) {
-					textButton.setBackColor(sf::Color::Color(240, 241, 242, 255));
-					textButton.setTextColor(sf::Color::Color(0, 0, 0, 180));
-				}
-				else {
-					textButton.setBackColor(sf::Color::Color(248, 249, 250, 255));
-					textButton.setTextColor(sf::Color::Color(0, 0, 0, 160));
-				}
+				handleButton(textButton);
+				handleButton(sResetButton);
+				handleButton(sPlayButton);
+				handleButton(sPauseButton);
+				handleButton(settingsButton);
 
 			}
 
@@ -96,20 +99,40 @@ void SpeedReader::loop() {
 				_programState = LoadText;
 			}
 
+			if (sPlayButton.isClicked(_window)) {
+				if(_display.isLoaded())
+					_display.unpause(_timer);
+			}
+
+			if (sPauseButton.isClicked(_window)) {
+				_display.pause(_timer);
+			}
+
+			if (sResetButton.isClicked(_window)) {
+				if(_display.isLoaded())
+					_display.resetIndex();
+					_window.draw(_display.getWord());
+					_timer.restart();
+			}
+
+			if (settingsButton.isClicked(_window)) {
+				_programState = Settings;
+			}
+
 
 			break;
 		case LoadText:
-			_window.draw(mainDisplay);
 
-			//std::cout << "Loaded" << std::endl;
-			//_text = L"Gdzieś jest, lecz nie wiadomo gdzie Świat w ktorym baśń ta dzieje się Maleńka pszczółka mieszka w nim Co wieść chce wsród owadów prym";
-			//_splitter.setText(_text);
-			//_splitter.chunkText(2);
-			//_display.loadText(_splitter);
-			//_programState = ProgramState::MainDisplay;
+			_window.draw(mainDisplay);
+			std::cout << "Loaded" << std::endl;
+			_text = L"Gdzieś jest, lecz nie wiadomo gdzie Świat w ktorym baśń ta dzieje się Maleńka pszczółka mieszka w nim Co wieść chce wsród owadów prym";
+			_splitter.setText(_text);
+			_splitter.chunkText(2);
+			_display.loadText(_splitter);
+			_programState = ProgramState::MainDisplay;
 
 			break;
-		case Setting:
+		case Settings:
 
 			break;
 		default:
@@ -119,6 +142,38 @@ void SpeedReader::loop() {
 		_window.display();
 	}
 }
+
+void SpeedReader::handleButton(Button& button) {
+	if (button.isMouseOver(_window)) {
+		button.setBackColor(sf::Color::Color(240, 241, 242, 255));
+	}
+	else {
+		button.setBackColor(sf::Color::Color(248, 249, 250, 255));
+	}
+}
+
+void SpeedReader::handleButton(TextButton& button) {
+	if (button.isMouseOver(_window)) {
+		button.setBackColor(sf::Color::Color(240, 241, 242, 255));
+		button.setTextColor(sf::Color::Color(0, 0, 0, 180));
+	}
+	else {
+		button.setBackColor(sf::Color::Color(248, 249, 250, 255));
+		button.setTextColor(sf::Color::Color(0, 0, 0, 160));
+	}
+}
+
+void SpeedReader::handleButton(SpriteButton& button) {
+	if (button.isMouseOver(_window)) {
+		button.setBackColor(sf::Color::Color(240, 241, 242, 255));
+		button.setSpriteColor(sf::Color::Color(0, 0, 0, 180));
+	}
+	else {
+		button.setBackColor(sf::Color::Color(248, 249, 250, 255));
+		button.setSpriteColor(sf::Color::Color(0, 0, 0, 160));
+	}
+}
+
 
 void SpeedReader::loadResources() {
 

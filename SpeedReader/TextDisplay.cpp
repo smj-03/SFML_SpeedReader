@@ -5,6 +5,7 @@ TextDisplay::TextDisplay() {
 	_wordListSize = 0;
 	_currentIndex = 0;
 	_wordsPerMinute = 500;
+	_isLoaded = false;
 
 	_font.loadFromFile("fonts/arial.ttf");
 	_word.setFont(_font);
@@ -27,12 +28,17 @@ void TextDisplay::centerText() {
 
 void TextDisplay::loadText(TextSplitter& splitter) {
 	// if size == 0 throw error
+	_isLoaded = true;
 	_currentIndex = 0;
 	_wordList = splitter.getChunks();
 	_wordListSize = _wordList.size();
 	_chunkSize = splitter.getChunkSize();
 	_word.setString(_wordList[0]);
 	centerText();
+}
+
+bool TextDisplay::isLoaded() {
+	return _isLoaded;
 }
 
 sf::Text TextDisplay::getWord() {
@@ -64,5 +70,11 @@ void TextDisplay::pause(sf::Clock& timer) {
 void TextDisplay::unpause(sf::Clock& timer) {
 	_isPaused = false;
 	timer.restart();
+}
+
+void TextDisplay::resetIndex() {
+	_currentIndex = 0;
+	_word.setString(_wordList[0]);
+	centerText();
 }
 

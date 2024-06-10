@@ -3,6 +3,9 @@
 #include "ProgramState.h"
 #include "TextSplitter.h"
 #include "TextDisplay.h"
+#include "Button.h"
+#include "SpriteButton.h"
+#include "TextButton.h"
 
 class SpeedReader {
 
@@ -19,6 +22,12 @@ private:
 	TextDisplay _display;
 
 	std::wstring _text;
+
+	void handleButton(Button& button);
+
+	void handleButton(TextButton& button);
+
+	void handleButton(SpriteButton& button);
 
 public:
 

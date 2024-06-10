@@ -11,6 +11,8 @@ public:
 
 	void setParent(sf::RectangleShape& parent);
 
+	void resetIndex();
+
 	void loadText(TextSplitter& splitter);
 
 	void calculateWord(sf::Clock& timer);
@@ -18,6 +20,8 @@ public:
 	sf::Text getWord();
 
 	sf::RectangleShape getBackground();
+
+	bool isLoaded();
 
 	bool isPaused();
 
@@ -49,6 +53,8 @@ private:
 	int _chunkSize = 1;
 
 	bool _isPaused;
+
+	bool _isLoaded;
 
 	void centerText();
 };
