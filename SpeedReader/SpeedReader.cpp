@@ -1,5 +1,6 @@
 ﻿#include "SpeedReader.h"
 #include <iostream>
+#include "TextBox.h"
 
 SpeedReader::SpeedReader() {
 	_window.create(sf::VideoMode(800, 450), "Speed Reader", sf::Style::Titlebar | sf::Style::Close);
@@ -59,7 +60,10 @@ void SpeedReader::loop() {
 	settingsButton.setSpriteColor(sf::Color::Color(0, 0, 0, 160));
 	settingsButton.setPosition({ 750, 400 });
 
-
+	TextBox textBox(24, sf::Color::Color(0, 0, 0, 200), true);
+	textBox.setFont(arial);
+	textBox.setPosition({ 30, 25 });
+;
 	while (_window.isOpen()) {
 		sf::Event event;
 		while (_window.pollEvent(event)) {
@@ -124,12 +128,13 @@ void SpeedReader::loop() {
 		case LoadText:
 
 			_window.draw(mainDisplay);
-			std::cout << "Loaded" << std::endl;
-			_text = L"Gdzieś jest, lecz nie wiadomo gdzie Świat w ktorym baśń ta dzieje się Maleńka pszczółka mieszka w nim Co wieść chce wsród owadów prym";
-			_splitter.setText(_text);
-			_splitter.chunkText(2);
-			_display.loadText(_splitter);
-			_programState = ProgramState::MainDisplay;
+			textBox.draw(_window);
+			//std::cout << "Loaded" << std::endl;
+			//_text = L"Gdzieś jest, lecz nie wiadomo gdzie Świat w ktorym baśń ta dzieje się Maleńka pszczółka mieszka w nim Co wieść chce wsród owadów prym";
+			//_splitter.setText(_text);
+			//_splitter.chunkText(2);
+			//_display.loadText(_splitter);
+			//_programState = ProgramState::MainDisplay;
 
 			break;
 		case Settings:
