@@ -2,14 +2,11 @@
 #include <iostream>
 
 void Test::test() {
-	window.create(sf::VideoMode(800, 600), "SFML");
+	m_button.setSize({ 100,25 });
+	m_button.setFillColor(sf::Color::Black);
+	m_button.setPosition({ 25,400 });
+}
 
-
-	while (window.isOpen()) {
-		while (window.pollEvent(event)) {
-			if (event.type == sf::Event::Closed) {
-				window.close();
-			}
-		}
-	}
+sf::RectangleShape Test::getButton() {
+	return m_button;
 }

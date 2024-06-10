@@ -1,0 +1,22 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "x64\\Debug\\SpriteButton.h.obj",
+            "outputs": [
+                "P:\\project\\SpeedReader\\SpeedReader\\x64\\Debug\\vc143.pdb",
+                "x64\\Debug\\",
+                "P:\\project\\SpeedReader\\SpeedReader\\x64\\Debug\\SpriteButton.h.ifc"
+            ],
+            "provides": [
+                {
+                    "logical-name": "SpriteButton.h",
+                    "source-path": "p:\\project\\speedreader\\speedreader\\spritebutton.h",
+                    "lookup-method": "absolute"
+                }
+            ],
+            "requires": []
+        }
+    ]
+}

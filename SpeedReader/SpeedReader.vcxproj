@@ -108,6 +108,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -126,6 +127,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -135,10 +137,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Button.cpp" />
+    <ClCompile Include="SpriteButton.cpp" />
+    <ClCompile Include="SpriteButton.h" />
+    <ClCompile Include="TextBox.cpp" />
+    <ClCompile Include="TextBox.h" />
+    <ClCompile Include="TextButton.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="ProgramState.h" />
+    <ClCompile Include="SpeedReader.cpp" />
+    <ClCompile Include="TextDisplay.cpp" />
+    <ClCompile Include="TextDisplay.h" />
     <ClCompile Include="TextSplitter.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Button.h" />
+    <ClInclude Include="TextButton.h" />
+    <ClInclude Include="SpeedReader.h" />
     <ClInclude Include="TextSplitter.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -4,11 +4,8 @@
 
 class EXPORT_API Test {
 private:
-
-	sf::Window window;
-	sf::Event event;
-
+	sf::RectangleShape m_button;
 public: 
-
 	void test();
+	sf::RectangleShape getButton();
 };
