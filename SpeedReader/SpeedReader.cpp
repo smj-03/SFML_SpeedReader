@@ -1,17 +1,9 @@
-#include "SpeedReader.h"
+﻿#include "SpeedReader.h"
 #include "Button.h"
 #include <iostream>
 
 SpeedReader::SpeedReader() {
-	_window.create(sf::VideoMode(800, 450), "SFML", sf::Style::Titlebar | sf::Style::Close);
-	//_display.loadText({ L"Welcome to Speed Reader!" });
-	//_text = L"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tincidunt orci ac sem lacinia laoreet. Sed quis aliquet libero. Nam ac tortor in eros condimentum accumsan. Aenean eleifend mi semper, faucibus est id, iaculis libero. Vestibulum laoreet nunc nec elit vehicula, vel varius augue rhoncus. Ut non auctor massa. Nulla.";
-	//_splitter.setText(_text);
-
-	// Do zrobienia zeby duze chunki sie miescily
-	//_splitter.chunkText(1);
-	//_display.loadText(_splitter);
-	//_timer.restart();
+	_window.create(sf::VideoMode(800, 450), "Speed Reader", sf::Style::Titlebar | sf::Style::Close);
 	_programState = ProgramState::MainDisplay;
 }
 
@@ -24,15 +16,12 @@ void SpeedReader::loop() {
 	sf::Font arial;
 	arial.loadFromFile("arial.ttf");
 
-	Button textButton = Button({ 100,25 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255));
-	textButton.setPosition({ 25,400 });
+	Button firstButton = Button({ 100,25 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255));
+	firstButton.setPosition({ 25,400 });
 
 
-	Button playButton = Button({ 100,25 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255));
-	playButton.setPosition({ 150 ,400 });
-
-	bool textButtonAction = false;
-	bool playButtonAction = false;
+	Button secondButton = Button({ 100,25 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255));
+	secondButton.setPosition({ 150 ,400 });
 
 	while (_window.isOpen()) {
 		sf::Event event;
@@ -51,42 +40,38 @@ void SpeedReader::loop() {
 			if (!_display.isPaused())
 				_display.calculateWord(_timer);
 			_window.draw(_display.getWord());
-			textButton.draw(_window);
-			playButton.draw(_window);
+			firstButton.draw(_window);
+			secondButton.draw(_window);
 
-			if (sf::Event::MouseMoved) {
-				if (textButton.isMouseOver(_window)) {
-					textButton.setBackColor(sf::Color::Color(240, 241, 242, 255));
-					if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && !textButtonAction) {
-						_programState = LoadText;
-						textButtonAction = true;
-					}
-				}
-				else {
-					textButton.setBackColor(sf::Color::Color(248, 249, 250, 255));
-				}
+			if (firstButton.isMouseOver(_window)) 
+				firstButton.setBackColor(sf::Color::Color(240, 241, 242, 255));
+			else
+				firstButton.setBackColor(sf::Color::Color(248, 249, 250, 255));
+		
 
-				if (playButton.isMouseOver(_window)) {
-					playButton.setBackColor(sf::Color::Color(240, 241, 242, 255));
-					if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && !playButtonAction) {
-						_display.pauseUnpause();
-						playButtonAction = true;
-					}
-				}
-				else {
-					playButton.setBackColor(sf::Color::Color(248, 249, 250, 255));
-				}
+			if (secondButton.isMouseOver(_window)) 
+				secondButton.setBackColor(sf::Color::Color(240, 241, 242, 255));
+			else 
+				secondButton.setBackColor(sf::Color::Color(248, 249, 250, 255));
+			
+
+			if (firstButton.isClicked(_window)) {
+				_display.pause(_timer);
+				_programState = LoadText;
+			}
+
+			if (secondButton.isClicked(_window)) {
+				_display.unpause(_timer);
 			}
 
 			break;
 		case LoadText:
 
-			std::cout << "DUAPAAAA" << std::endl;
-			_text = L"Raz dwa trzy cztery";
+			std::cout << "Loaded" << std::endl;
+			_text = L"Gdzieś jest, lecz nie wiadomo gdzie Świat w ktorym baśń ta dzieje się Maleńka pszczółka mieszka w nim Co wieść chce wsród owadów prym";
 			_splitter.setText(_text);
-			_splitter.chunkText(1);
+			_splitter.chunkText(2);
 			_display.loadText(_splitter);
-			_timer.restart();
 			_programState = ProgramState::MainDisplay;
 
 			break;
@@ -96,13 +81,6 @@ void SpeedReader::loop() {
 		default:
 			break;
 		}
-
-		//window.draw(point);
-		//window.draw(button);
-		//window.draw(button2);
-		//window.draw(button3);
-		//btn1.draw(_window);
-		//_window.draw(btn1.getButton());
 
 		_window.display();
 	}

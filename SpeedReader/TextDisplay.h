@@ -4,6 +4,25 @@
 
 typedef std::vector<std::wstring> wordList;
 class TextDisplay {
+
+public:
+
+	TextDisplay();
+
+	void loadText(TextSplitter& splitter);
+
+	void calculateWord(sf::Clock& timer);
+
+	sf::Text getWord();
+
+	sf::RectangleShape getBackground();
+
+	bool isPaused();
+
+	void pause(sf::Clock& timer);
+
+	void unpause(sf::Clock& timer);
+
 private:
 
 	// To create BOX class
@@ -30,21 +49,4 @@ private:
 	bool _isPaused;
 
 	void centerText();
-
-public:
-
-	TextDisplay();
-
-	void loadText(TextSplitter& splitter);
-
-	void calculateWord(sf::Clock& timer);
-
-	sf::Text getWord();
-
-	sf::RectangleShape getBackground();
-
-	bool isPaused();
-
-	void pauseUnpause();
-
 };

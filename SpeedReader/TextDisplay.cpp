@@ -4,7 +4,7 @@ TextDisplay::TextDisplay() {
 	_isPaused = true;
 	_wordListSize = 0;
 	_currentIndex = 0;
-	_wordsPerMinute = 200;
+	_wordsPerMinute = 500;
 
 	_background.setSize(sf::Vector2f(750, 350));
 	_background.setPosition(25, 25);
@@ -29,6 +29,7 @@ void TextDisplay::centerText() {
 
 void TextDisplay::loadText(TextSplitter& splitter) {
 	// if size == 0 throw error
+	_currentIndex = 0;
 	_wordList = splitter.getChunks();
 	_wordListSize = _wordList.size();
 	_chunkSize = splitter.getChunkSize();
@@ -57,10 +58,13 @@ bool TextDisplay::isPaused() {
 	return _isPaused;
 }
 
-void TextDisplay::pauseUnpause() {
-	if (_isPaused)
-		_isPaused = false;
-	else
-		_isPaused = true;
+void TextDisplay::pause(sf::Clock& timer) {
+	_isPaused = true;
+	timer.restart();
+}
+
+void TextDisplay::unpause(sf::Clock& timer) {
+	_isPaused = false;
+	timer.restart();
 }
 

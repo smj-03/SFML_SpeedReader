@@ -1,18 +1,5 @@
 ﻿  Scanning sources for module dependencies...
-  Button.cpp
   SpeedReader.cpp
-  TextButton.cpp
-P:\project\SpeedReader\SpeedReader\TextButton.cpp(33,11): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
-P:\project\SpeedReader\SpeedReader\TextButton.cpp(33,11): warning C4244:         with
-P:\project\SpeedReader\SpeedReader\TextButton.cpp(33,11): warning C4244:         [
-P:\project\SpeedReader\SpeedReader\TextButton.cpp(33,11): warning C4244:             T=float
-P:\project\SpeedReader\SpeedReader\TextButton.cpp(33,11): warning C4244:         ]
-P:\project\SpeedReader\SpeedReader\TextButton.cpp(34,11): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
-P:\project\SpeedReader\SpeedReader\TextButton.cpp(34,11): warning C4244:         with
-P:\project\SpeedReader\SpeedReader\TextButton.cpp(34,11): warning C4244:         [
-P:\project\SpeedReader\SpeedReader\TextButton.cpp(34,11): warning C4244:             T=float
-P:\project\SpeedReader\SpeedReader\TextButton.cpp(34,11): warning C4244:         ]
-  Generating Code...
   SpeedReader.vcxproj -> P:\project\SpeedReader\x64\Debug\SpeedReader.exe
   P:\project\SpeedReader\x64\Debug\SpeedReader.exe
           1 file(s) copied.

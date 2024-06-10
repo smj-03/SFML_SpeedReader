@@ -17,7 +17,9 @@ public:
 
 	bool isClicked(sf::RenderWindow& window);
 
+
 protected:
 
+	bool m_wasClicked;
 	sf::RectangleShape m_button;
 };

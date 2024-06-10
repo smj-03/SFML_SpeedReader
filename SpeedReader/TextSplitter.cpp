@@ -23,16 +23,22 @@ int TextSplitter::getChunkSize() {
 }
 
 void TextSplitter::chunkText() {
+	_chunks.clear();
 	_chunkSize = 1;
 	std::wistringstream stream(_text);
 	std::wstring word;
+
 
 	while (stream >> word)
 		_chunks.push_back(word);
 }
 
 void TextSplitter::chunkText(int chunkSize) {
+
+	
 	chunkText();
+	if (chunkSize == 1)
+		return;
 	_chunkSize = chunkSize;
 	wordList chunks;
 

@@ -27,3 +27,16 @@ bool Button::isMouseOver(sf::RenderWindow& window) {
 	sf::FloatRect buttonBounds = m_button.getGlobalBounds();
 	return buttonBounds.contains(static_cast<sf::Vector2f>(mousePos));
 }
+
+bool Button::isClicked(sf::RenderWindow & window) {
+	if (isMouseOver(window)) {
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && !m_wasClicked) {
+			m_wasClicked = true;
+			return true;
+		}
+		else if (!sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+			m_wasClicked = false;
+		}
+	}
+	return false;
+}
