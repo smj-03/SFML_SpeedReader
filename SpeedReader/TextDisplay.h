@@ -9,6 +9,8 @@ public:
 
 	TextDisplay();
 
+	void setParent(sf::RectangleShape& parent);
+
 	void loadText(TextSplitter& splitter);
 
 	void calculateWord(sf::Clock& timer);

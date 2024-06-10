@@ -6,19 +6,17 @@ TextDisplay::TextDisplay() {
 	_currentIndex = 0;
 	_wordsPerMinute = 500;
 
-	_background.setSize(sf::Vector2f(750, 350));
-	_background.setPosition(25, 25);
-	_background.setFillColor(sf::Color::Color(248, 249, 250, 255));
-	_background.setOutlineColor(sf::Color::Color(222, 226, 230, 255));
-	_background.setOutlineThickness(-1);
-
-	_font.loadFromFile("arial.ttf");
+	_font.loadFromFile("fonts/arial.ttf");
 	_word.setFont(_font);
 	_word.setCharacterSize(50);
 	_word.setFillColor(sf::Color::Color(0, 0, 0, 200));
 
 	_word.setString("Welcome to Speed Reader!");
 	centerText();
+}
+
+void TextDisplay::setParent(sf::RectangleShape& parent){
+	_background = parent;
 }
 
 void TextDisplay::centerText() {

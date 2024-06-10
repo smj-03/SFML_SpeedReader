@@ -138,6 +138,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Button.cpp" />
+    <ClCompile Include="SpriteButton.cpp" />
+    <ClCompile Include="SpriteButton.h" />
     <ClCompile Include="TextButton.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ProgramState.h" />

@@ -3,6 +3,7 @@
 
 class Button {
 public:
+
 	Button();
 
 	Button(sf::Vector2f size, sf::Color bgColor, sf::Color outColor);
@@ -17,9 +18,10 @@ public:
 
 	bool isClicked(sf::RenderWindow& window);
 
-
 protected:
 
-	bool m_wasClicked;
 	sf::RectangleShape m_button;
+
+	bool m_wasClicked;
+
 };

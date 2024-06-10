@@ -4,6 +4,7 @@
 
 class TextButton : public Button {
 public:
+
 	TextButton();
 
 	TextButton(std::string text, sf::Vector2f size, sf::Color bgColor, sf::Color outColor, sf::Color textColor);
@@ -16,9 +17,9 @@ public:
 
 	void draw(sf::RenderWindow& window);
 
-private:
+protected:
 
-	sf::RectangleShape m_button;
 	sf::Text m_text;
+
 	sf::CircleShape dot;
 };
