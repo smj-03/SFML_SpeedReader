@@ -63,12 +63,33 @@ void SpeedReader::loop() {
 	TextBox textBox(24, sf::Color::Color(0, 0, 0, 200), true);
 	textBox.setFont(arial);
 	textBox.setPosition({ 30, 25 });
-;
+
+	sf::Event event;
+	sf::Uint16 lastChar = 0;
 	while (_window.isOpen()) {
-		sf::Event event;
 		while (_window.pollEvent(event)) {
 			if (event.type == sf::Event::Closed) {
 				_window.close();
+			}
+
+			if (event.type == sf::Event::TextEntered) {
+				lastChar = event.text.unicode;
+			}
+
+			if (event.type == sf::Event::KeyPressed) {
+				if (event.key.code == sf::Keyboard::Escape) {
+					if (_programState == MainDisplay)
+						_programState = Settings;
+					else
+						_programState = MainDisplay;
+				}
+
+				if (event.key.code == sf::Keyboard::Space) {
+					if (_display.isPaused())
+						_display.unpause(_timer);
+					else
+						_display.pause(_timer);
+				}
 			}
 		}
 		// Add settings for dark mode
@@ -104,8 +125,7 @@ void SpeedReader::loop() {
 			}
 
 			if (sPlayButton.isClicked(_window)) {
-				if(_display.isLoaded())
-					_display.unpause(_timer);
+				_display.unpause(_timer);
 			}
 
 			if (sPauseButton.isClicked(_window)) {
@@ -113,10 +133,11 @@ void SpeedReader::loop() {
 			}
 
 			if (sResetButton.isClicked(_window)) {
-				if(_display.isLoaded())
+				if (_display.isLoaded()) {
 					_display.resetIndex();
 					_window.draw(_display.getWord());
 					_timer.restart();
+				}
 			}
 
 			if (settingsButton.isClicked(_window)) {
@@ -129,6 +150,24 @@ void SpeedReader::loop() {
 
 			_window.draw(mainDisplay);
 			textBox.draw(_window);
+			
+			if(lastChar != 0)
+				textBox.typedOn(lastChar);
+
+			lastChar = 0;
+
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)){
+				std::wstring newText = textBox.getText();
+				if (!newText.empty()) {
+					_text = newText;
+					_splitter.setText(_text);
+					_splitter.chunkText(1);
+					_display.loadText(_splitter);
+					_timer.restart();
+				}
+				_programState = ProgramState::MainDisplay;
+			}
+
 			//std::cout << "Loaded" << std::endl;
 			//_text = L"Gdzieś jest, lecz nie wiadomo gdzie Świat w ktorym baśń ta dzieje się Maleńka pszczółka mieszka w nim Co wieść chce wsród owadów prym";
 			//_splitter.setText(_text);
@@ -143,7 +182,6 @@ void SpeedReader::loop() {
 		default:
 			break;
 		}
-
 		_window.display();
 	}
 }

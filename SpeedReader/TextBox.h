@@ -24,9 +24,11 @@ public:
 
 	void setSelected(bool sel);
 
-	std::string getText();
+	std::wstring getText();
 
-	void typedOn(sf::Event input);
+	void typedOn(sf::Uint16 charTyped);
+
+	void typedOn(sf::Event event);
 
 	void draw(sf::RenderWindow& window);
 
@@ -34,7 +36,7 @@ private:
 
 	sf::Text m_textbox;
 
-	std::ostringstream m_text;
+	std::wostringstream m_text;
 
 	bool m_isSelected = false;
 

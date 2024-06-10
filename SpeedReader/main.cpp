@@ -5,7 +5,6 @@
 #include "TextSplitter.h"
 
 int main() {
-
 	SpeedReader SR;
 	SR.loop();
 
