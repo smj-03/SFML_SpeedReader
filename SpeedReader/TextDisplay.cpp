@@ -1,7 +1,7 @@
 #include "TextDisplay.h"
 
 TextDisplay::TextDisplay() {
-	_isPaused = false;
+	_isPaused = true;
 	_wordListSize = 0;
 	_currentIndex = 0;
 	_wordsPerMinute = 200;
@@ -16,6 +16,9 @@ TextDisplay::TextDisplay() {
 	_word.setFont(_font);
 	_word.setCharacterSize(50);
 	_word.setFillColor(sf::Color::Color(0, 0, 0, 200));
+
+	_word.setString("Welcome to Speed Reader!");
+	centerText();
 }
 
 void TextDisplay::centerText() {
@@ -29,6 +32,8 @@ void TextDisplay::loadText(TextSplitter& splitter) {
 	_wordList = splitter.getChunks();
 	_wordListSize = _wordList.size();
 	_chunkSize = splitter.getChunkSize();
+	_word.setString(_wordList[0]);
+	centerText();
 }
 
 sf::Text TextDisplay::getWord() {
@@ -46,5 +51,16 @@ void TextDisplay::calculateWord(sf::Clock& timer) {
 		_currentIndex++;
 		timer.restart();
 	}
+}
+
+bool TextDisplay::isPaused() {
+	return _isPaused;
+}
+
+void TextDisplay::pauseUnpause() {
+	if (_isPaused)
+		_isPaused = false;
+	else
+		_isPaused = true;
 }
 

@@ -15,6 +15,8 @@ public:
 
 	bool isMouseOver(sf::RenderWindow& window);
 
+	bool isClicked(sf::RenderWindow& window);
+
 protected:
 
 	sf::RectangleShape m_button;

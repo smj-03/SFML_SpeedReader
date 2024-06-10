@@ -21,13 +21,11 @@ private:
 
 	int _wordsPerMinute;
 
-	float _interval;
-
 	int _currentIndex;
 
 	int _wordListSize;
 
-	int _chunkSize;
+	int _chunkSize = 1;
 
 	bool _isPaused;
 
@@ -44,5 +42,9 @@ public:
 	sf::Text getWord();
 
 	sf::RectangleShape getBackground();
+
+	bool isPaused();
+
+	void pauseUnpause();
 
 };

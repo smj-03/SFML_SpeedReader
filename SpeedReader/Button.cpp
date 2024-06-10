@@ -13,28 +13,17 @@ void Button::setBackColor(sf::Color color) {
 	m_button.setFillColor(color);
 }
 
-void Button::setPosition(sf::Vector2f pos) {
-	m_button.setPosition(pos);
-}
 
 void Button::draw(sf::RenderWindow& window) {
 	window.draw(m_button);
 }
 
+void Button::setPosition(sf::Vector2f pos) {
+	m_button.setPosition(pos);
+}
+
 bool Button::isMouseOver(sf::RenderWindow& window) {
-	float mouseX = sf::Mouse::getPosition(window).x;
-	float mouseY = sf::Mouse::getPosition(window).y;
-
-	float btnPosX = m_button.getPosition().x;
-	float btnPosY = m_button.getPosition().y;
-
-	float btnxPosWidth = m_button.getPosition().x + m_button.getLocalBounds().width;
-	float btnyPosHeight = m_button.getPosition().y + m_button.getLocalBounds().height;
-
-	if (mouseX < btnxPosWidth && mouseX > btnPosX && mouseY < btnyPosHeight && mouseY > btnPosY) {
-		return true;
-	}
-	else {
-		return false;
-	}
+	sf::Vector2i mousePos = sf::Mouse::getPosition(window);
+	sf::FloatRect buttonBounds = m_button.getGlobalBounds();
+	return buttonBounds.contains(static_cast<sf::Vector2f>(mousePos));
 }
