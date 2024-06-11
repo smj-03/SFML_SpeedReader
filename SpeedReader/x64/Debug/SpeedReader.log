@@ -1,35 +1,45 @@
 ﻿  Scanning sources for module dependencies...
   SpeedReader.cpp
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(34,62): warning C4305: 'argument': truncation from 'double' to 'T'
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(34,62): warning C4305:         with
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(34,62): warning C4305:         [
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(34,62): warning C4305:             T=float
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(34,62): warning C4305:         ]
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(34,56): warning C4305: 'argument': truncation from 'double' to 'T'
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(34,56): warning C4305:         with
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(34,56): warning C4305:         [
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(34,56): warning C4305:             T=float
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(34,56): warning C4305:         ]
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(42,59): warning C4305: 'argument': truncation from 'double' to 'T'
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(42,59): warning C4305:         with
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(42,59): warning C4305:         [
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(42,59): warning C4305:             T=float
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(42,59): warning C4305:         ]
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(42,54): warning C4305: 'argument': truncation from 'double' to 'T'
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(42,54): warning C4305:         with
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(42,54): warning C4305:         [
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(42,54): warning C4305:             T=float
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(42,54): warning C4305:         ]
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(51,61): warning C4305: 'argument': truncation from 'double' to 'T'
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(51,61): warning C4305:         with
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(51,61): warning C4305:         [
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(51,61): warning C4305:             T=float
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(51,61): warning C4305:         ]
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(51,56): warning C4305: 'argument': truncation from 'double' to 'T'
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(51,56): warning C4305:         with
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(51,56): warning C4305:         [
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(51,56): warning C4305:             T=float
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(51,56): warning C4305:         ]
+P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(33,62): warning C4305: 'argument': truncation from 'double' to 'T'
+P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(33,62): warning C4305:         with
+P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(33,62): warning C4305:         [
+P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(33,62): warning C4305:             T=float
+P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(33,62): warning C4305:         ]
+P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(33,56): warning C4305: 'argument': truncation from 'double' to 'T'
+P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(33,56): warning C4305:         with
+P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(33,56): warning C4305:         [
+P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(33,56): warning C4305:             T=float
+P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(33,56): warning C4305:         ]
+P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(41,59): warning C4305: 'argument': truncation from 'double' to 'T'
+P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(41,59): warning C4305:         with
+P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(41,59): warning C4305:         [
+P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(41,59): warning C4305:             T=float
+P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(41,59): warning C4305:         ]
+P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(41,54): warning C4305: 'argument': truncation from 'double' to 'T'
+P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(41,54): warning C4305:         with
+P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(41,54): warning C4305:         [
+P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(41,54): warning C4305:             T=float
+P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(41,54): warning C4305:         ]
+P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(50,61): warning C4305: 'argument': truncation from 'double' to 'T'
+P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(50,61): warning C4305:         with
+P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(50,61): warning C4305:         [
+P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(50,61): warning C4305:             T=float
+P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(50,61): warning C4305:         ]
+P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(50,56): warning C4305: 'argument': truncation from 'double' to 'T'
+P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(50,56): warning C4305:         with
+P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(50,56): warning C4305:         [
+P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(50,56): warning C4305:             T=float
+P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(50,56): warning C4305:         ]
+P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(82,62): warning C4305: 'argument': truncation from 'double' to 'T'
+P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(82,62): warning C4305:         with
+P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(82,62): warning C4305:         [
+P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(82,62): warning C4305:             T=float
+P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(82,62): warning C4305:         ]
+P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(82,57): warning C4305: 'argument': truncation from 'double' to 'T'
+P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(82,57): warning C4305:         with
+P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(82,57): warning C4305:         [
+P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(82,57): warning C4305:             T=float
+P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(82,57): warning C4305:         ]
   SpeedReader.vcxproj -> P:\project\SpeedReader\x64\Debug\SpeedReader.exe
   P:\project\SpeedReader\x64\Debug\SpeedReader.exe
           1 file(s) copied.

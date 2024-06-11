@@ -2,10 +2,11 @@
 
 TextDisplay::TextDisplay() {
 	_isPaused = true;
+	_isLoaded = false;
+
 	_wordListSize = 0;
 	_currentIndex = 0;
 	_wordsPerMinute = 500;
-	_isLoaded = false;
 
 	_font.loadFromFile("fonts/arial.ttf");
 	_word.setFont(_font);
@@ -68,8 +69,10 @@ void TextDisplay::pause(sf::Clock& timer) {
 }
 
 void TextDisplay::unpause(sf::Clock& timer) {
-	_isPaused = false;
-	timer.restart();
+	if (_isLoaded) {
+		_isPaused = false;
+		timer.restart();
+	}
 }
 
 void TextDisplay::resetIndex() {

@@ -1,15 +1,14 @@
 ﻿#include "SpeedReader.h"
 #include <iostream>
 #include "TextBox.h"
+#include <FileExplorer.h>
 
 SpeedReader::SpeedReader() {
 	_window.create(sf::VideoMode(800, 450), "Speed Reader", sf::Style::Titlebar | sf::Style::Close);
 	_programState = ProgramState::MainDisplay;
 }
 
-void SpeedReader::initialize() {
-
-}
+void SpeedReader::initialize() {}
 
 void SpeedReader::loop() {
 
@@ -63,12 +62,69 @@ void SpeedReader::loop() {
 	TextBox textBox(24, sf::Color::Color(0, 0, 0, 200), true);
 	textBox.setFont(arial);
 	textBox.setPosition({ 30, 25 });
-;
+
+	TextButton clearButton = TextButton("CLEAR", { 100,25 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255), sf::Color::Color(0, 0, 0, 160));
+	clearButton.setFont(arial);
+	clearButton.setPosition({ 25,400 });
+
+	TextButton loadButton = TextButton("LOAD", { 100,25 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255), sf::Color::Color(0, 0, 0, 160));
+	loadButton.setFont(arial);
+	loadButton.setPosition({ 140,400 });
+
+	TextButton saveButton = TextButton("SAVE", { 100,25 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255), sf::Color::Color(0, 0, 0, 160));
+	saveButton.setFont(arial);
+	saveButton.setPosition({ 255,400 });
+
+	sf::Texture returnIcon;
+	if (!returnIcon.loadFromFile("icons/return-icon.png")) {
+		std::cout << "pupa";
+	}
+	SpriteButton returnButton = SpriteButton(returnIcon, { 0.9, 0.9 }, { 25, 25 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255));
+	returnButton.setSpriteColor(sf::Color::Color(0, 0, 0, 160));
+	returnButton.setPosition({ 750, 400 });
+
+	FileExplorer FE;
+
+	sf::Event event;
+	sf::Uint16 lastChar = 0;
 	while (_window.isOpen()) {
-		sf::Event event;
 		while (_window.pollEvent(event)) {
 			if (event.type == sf::Event::Closed) {
 				_window.close();
+			}
+
+			if (event.type == sf::Event::TextEntered) {
+				if (_programState == LoadText) {
+					lastChar = event.text.unicode;
+				}
+			}	
+
+			if (event.type == sf::Event::KeyPressed) {
+				if (event.key.code == sf::Keyboard::Escape) {
+					if (_programState == MainDisplay)
+						_programState = Settings;
+					else
+						_programState = MainDisplay;
+				}
+
+				if (event.key.code == sf::Keyboard::Space) {
+					if (_programState == MainDisplay) {
+						if (_display.isPaused())
+							_display.unpause(_timer);
+						else
+							_display.pause(_timer);
+					}
+				}
+
+				if (event.key.code == sf::Keyboard::R) {
+					if (_programState == MainDisplay) {
+						if (_display.isLoaded()) {
+							_display.resetIndex();
+							_window.draw(_display.getWord());
+							_display.pause(_timer);
+						}
+					}
+				}
 			}
 		}
 		// Add settings for dark mode
@@ -104,8 +160,7 @@ void SpeedReader::loop() {
 			}
 
 			if (sPlayButton.isClicked(_window)) {
-				if(_display.isLoaded())
-					_display.unpause(_timer);
+				_display.unpause(_timer);
 			}
 
 			if (sPauseButton.isClicked(_window)) {
@@ -113,10 +168,11 @@ void SpeedReader::loop() {
 			}
 
 			if (sResetButton.isClicked(_window)) {
-				if(_display.isLoaded())
+				if (_display.isLoaded()) {
 					_display.resetIndex();
 					_window.draw(_display.getWord());
-					_timer.restart();
+					_display.pause(_timer);
+				}
 			}
 
 			if (settingsButton.isClicked(_window)) {
@@ -129,6 +185,66 @@ void SpeedReader::loop() {
 
 			_window.draw(mainDisplay);
 			textBox.draw(_window);
+			clearButton.draw(_window);
+			saveButton.draw(_window);
+			loadButton.draw(_window);
+			returnButton.draw(_window);
+
+			if (event.type == sf::Event::MouseMoved) {
+
+				handleButton(textButton);
+				handleButton(clearButton);
+				handleButton(saveButton);
+				handleButton(loadButton);
+				handleButton(returnButton);
+
+			}
+
+			if (clearButton.isClicked(_window)) {
+				textBox.clearText();
+			}
+
+			if (saveButton.isClicked(_window)) {
+				FE.SaveFileContent(textBox.getText());
+			}
+
+			if (loadButton.isClicked(_window)) {
+				std::wstring filePath = FE.OpenTextFileDialog();
+				if (filePath.empty()) {
+					std::wcerr << L"No file selected." << std::endl;
+				}
+
+				std::wstring fileContent = FE.ReadFileContent(filePath);
+
+				_text = fileContent;
+				_splitter.setText(_text);
+				_splitter.chunkText(1);
+				_display.loadText(_splitter);
+				_timer.restart();
+				_programState = ProgramState::MainDisplay;
+			}
+
+			if (returnButton.isClicked(_window)) {
+				_programState = ProgramState::MainDisplay;
+			}
+
+			if (lastChar != 0)
+				textBox.typedOn(lastChar);
+
+			lastChar = 0;
+
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
+				std::wstring newText = textBox.getText();
+				if (!newText.empty()) {
+					_text = newText;
+					_splitter.setText(_text);
+					_splitter.chunkText(1);
+					_display.loadText(_splitter);
+					_timer.restart();
+				}
+				_programState = ProgramState::MainDisplay;
+			}
+
 			//std::cout << "Loaded" << std::endl;
 			//_text = L"Gdzieś jest, lecz nie wiadomo gdzie Świat w ktorym baśń ta dzieje się Maleńka pszczółka mieszka w nim Co wieść chce wsród owadów prym";
 			//_splitter.setText(_text);
@@ -143,7 +259,6 @@ void SpeedReader::loop() {
 		default:
 			break;
 		}
-
 		_window.display();
 	}
 }
