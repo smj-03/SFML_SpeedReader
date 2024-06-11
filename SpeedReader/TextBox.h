@@ -26,6 +26,8 @@ public:
 
 	std::wstring getText();
 
+	void clearText();
+
 	void typedOn(sf::Uint16 charTyped);
 
 	void typedOn(sf::Event event);

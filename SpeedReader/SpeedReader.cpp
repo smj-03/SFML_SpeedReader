@@ -1,15 +1,14 @@
 ﻿#include "SpeedReader.h"
 #include <iostream>
 #include "TextBox.h"
+#include <FileExplorer.h>
 
 SpeedReader::SpeedReader() {
 	_window.create(sf::VideoMode(800, 450), "Speed Reader", sf::Style::Titlebar | sf::Style::Close);
 	_programState = ProgramState::MainDisplay;
 }
 
-void SpeedReader::initialize() {
-
-}
+void SpeedReader::initialize() {}
 
 void SpeedReader::loop() {
 
@@ -64,6 +63,28 @@ void SpeedReader::loop() {
 	textBox.setFont(arial);
 	textBox.setPosition({ 30, 25 });
 
+	TextButton clearButton = TextButton("CLEAR", { 100,25 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255), sf::Color::Color(0, 0, 0, 160));
+	clearButton.setFont(arial);
+	clearButton.setPosition({ 25,400 });
+
+	TextButton loadButton = TextButton("LOAD", { 100,25 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255), sf::Color::Color(0, 0, 0, 160));
+	loadButton.setFont(arial);
+	loadButton.setPosition({ 140,400 });
+
+	TextButton saveButton = TextButton("SAVE", { 100,25 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255), sf::Color::Color(0, 0, 0, 160));
+	saveButton.setFont(arial);
+	saveButton.setPosition({ 255,400 });
+
+	sf::Texture returnIcon;
+	if (!returnIcon.loadFromFile("icons/return-icon.png")) {
+		std::cout << "pupa";
+	}
+	SpriteButton returnButton = SpriteButton(returnIcon, { 0.9, 0.9 }, { 25, 25 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255));
+	returnButton.setSpriteColor(sf::Color::Color(0, 0, 0, 160));
+	returnButton.setPosition({ 750, 400 });
+
+	FileExplorer FE;
+
 	sf::Event event;
 	sf::Uint16 lastChar = 0;
 	while (_window.isOpen()) {
@@ -73,8 +94,10 @@ void SpeedReader::loop() {
 			}
 
 			if (event.type == sf::Event::TextEntered) {
-				lastChar = event.text.unicode;
-			}
+				if (_programState == LoadText) {
+					lastChar = event.text.unicode;
+				}
+			}	
 
 			if (event.type == sf::Event::KeyPressed) {
 				if (event.key.code == sf::Keyboard::Escape) {
@@ -85,10 +108,22 @@ void SpeedReader::loop() {
 				}
 
 				if (event.key.code == sf::Keyboard::Space) {
-					if (_display.isPaused())
-						_display.unpause(_timer);
-					else
-						_display.pause(_timer);
+					if (_programState == MainDisplay) {
+						if (_display.isPaused())
+							_display.unpause(_timer);
+						else
+							_display.pause(_timer);
+					}
+				}
+
+				if (event.key.code == sf::Keyboard::R) {
+					if (_programState == MainDisplay) {
+						if (_display.isLoaded()) {
+							_display.resetIndex();
+							_window.draw(_display.getWord());
+							_display.pause(_timer);
+						}
+					}
 				}
 			}
 		}
@@ -136,7 +171,7 @@ void SpeedReader::loop() {
 				if (_display.isLoaded()) {
 					_display.resetIndex();
 					_window.draw(_display.getWord());
-					_timer.restart();
+					_display.pause(_timer);
 				}
 			}
 
@@ -150,13 +185,55 @@ void SpeedReader::loop() {
 
 			_window.draw(mainDisplay);
 			textBox.draw(_window);
-			
-			if(lastChar != 0)
+			clearButton.draw(_window);
+			saveButton.draw(_window);
+			loadButton.draw(_window);
+			returnButton.draw(_window);
+
+			if (event.type == sf::Event::MouseMoved) {
+
+				handleButton(textButton);
+				handleButton(clearButton);
+				handleButton(saveButton);
+				handleButton(loadButton);
+				handleButton(returnButton);
+
+			}
+
+			if (clearButton.isClicked(_window)) {
+				textBox.clearText();
+			}
+
+			if (saveButton.isClicked(_window)) {
+
+			}
+
+			if (loadButton.isClicked(_window)) {
+				std::wstring filePath = FE.OpenTextFileDialog();
+				if (filePath.empty()) {
+					std::wcerr << L"No file selected." << std::endl;
+				}
+
+				std::wstring fileContent = FE.ReadFileContent(filePath);
+
+				_text = fileContent;
+				_splitter.setText(_text);
+				_splitter.chunkText(1);
+				_display.loadText(_splitter);
+				_timer.restart();
+				_programState = ProgramState::MainDisplay;
+			}
+
+			if (returnButton.isClicked(_window)) {
+				_programState = ProgramState::MainDisplay;
+			}
+
+			if (lastChar != 0)
 				textBox.typedOn(lastChar);
 
 			lastChar = 0;
 
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)){
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
 				std::wstring newText = textBox.getText();
 				if (!newText.empty()) {
 					_text = newText;

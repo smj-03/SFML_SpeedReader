@@ -8,6 +8,8 @@ TextBox::TextBox(int size, sf::Color color, bool selected) {
 	m_textbox.setCharacterSize(size);
 	m_textbox.setFillColor(color);
 	m_isSelected = selected;
+	m_limit = 300;
+	m_hasLimit = true;
 
 	if (selected) {
 		m_textbox.setString(L"_");
@@ -84,6 +86,18 @@ void TextBox::typedOn(sf::Event event) {
 	}
 }
 
+void TextBox::clearText() {
+	m_textbox.setString("");
+	m_text.str(L""); 
+	m_text.clear();  
+	if (m_isSelected) {
+		m_textbox.setString(L"_");
+	}
+	else {
+		m_textbox.setString(L"");
+	}
+}
+
 void TextBox::draw(sf::RenderWindow& window) {
 	window.draw(m_textbox);
 }
@@ -155,6 +169,9 @@ void TextBox::inputLogic(int charTyped) {
 		if (m_text.str().length() > 0) {
 			deleteLastChar();
 		}
+	}
+	if (!(m_text.str().length() % 35)) {
+		m_text << L"\n";
 	}
 	m_textbox.setString(m_text.str() + L"_");
 }
