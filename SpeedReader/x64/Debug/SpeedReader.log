@@ -1,45 +1,9 @@
 ﻿  Scanning sources for module dependencies...
-  SpeedReader.cpp
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(33,62): warning C4305: 'argument': truncation from 'double' to 'T'
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(33,62): warning C4305:         with
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(33,62): warning C4305:         [
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(33,62): warning C4305:             T=float
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(33,62): warning C4305:         ]
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(33,56): warning C4305: 'argument': truncation from 'double' to 'T'
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(33,56): warning C4305:         with
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(33,56): warning C4305:         [
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(33,56): warning C4305:             T=float
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(33,56): warning C4305:         ]
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(41,59): warning C4305: 'argument': truncation from 'double' to 'T'
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(41,59): warning C4305:         with
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(41,59): warning C4305:         [
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(41,59): warning C4305:             T=float
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(41,59): warning C4305:         ]
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(41,54): warning C4305: 'argument': truncation from 'double' to 'T'
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(41,54): warning C4305:         with
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(41,54): warning C4305:         [
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(41,54): warning C4305:             T=float
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(41,54): warning C4305:         ]
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(50,61): warning C4305: 'argument': truncation from 'double' to 'T'
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(50,61): warning C4305:         with
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(50,61): warning C4305:         [
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(50,61): warning C4305:             T=float
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(50,61): warning C4305:         ]
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(50,56): warning C4305: 'argument': truncation from 'double' to 'T'
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(50,56): warning C4305:         with
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(50,56): warning C4305:         [
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(50,56): warning C4305:             T=float
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(50,56): warning C4305:         ]
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(82,62): warning C4305: 'argument': truncation from 'double' to 'T'
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(82,62): warning C4305:         with
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(82,62): warning C4305:         [
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(82,62): warning C4305:             T=float
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(82,62): warning C4305:         ]
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(82,57): warning C4305: 'argument': truncation from 'double' to 'T'
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(82,57): warning C4305:         with
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(82,57): warning C4305:         [
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(82,57): warning C4305:             T=float
-P:\project\SpeedReader\SpeedReader\SpeedReader.cpp(82,57): warning C4305:         ]
+  main.cpp
+P:\project\SpeedReader\SpeedReader\main.cpp(6,1): warning C4005: '_WIN32_WINNT': macro redefinition
+  D:\Windows Kits\10\Include\10.0.22621.0\shared\sdkddkver.h(224,1):
+  see previous definition of '_WIN32_WINNT'
+  
   SpeedReader.vcxproj -> P:\project\SpeedReader\x64\Debug\SpeedReader.exe
   P:\project\SpeedReader\x64\Debug\SpeedReader.exe
           1 file(s) copied.

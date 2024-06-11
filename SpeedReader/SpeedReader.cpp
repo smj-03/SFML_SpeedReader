@@ -6,6 +6,10 @@
 SpeedReader::SpeedReader() {
 	_window.create(sf::VideoMode(800, 450), "Speed Reader", sf::Style::Titlebar | sf::Style::Close);
 	_programState = ProgramState::MainDisplay;
+
+	sf::Image icon;
+	icon.loadFromFile("icons/logo.png");
+	_window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 }
 
 void SpeedReader::initialize() {}
@@ -82,6 +86,20 @@ void SpeedReader::loop() {
 	SpriteButton returnButton = SpriteButton(returnIcon, { 0.9, 0.9 }, { 25, 25 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255));
 	returnButton.setSpriteColor(sf::Color::Color(0, 0, 0, 160));
 	returnButton.setPosition({ 750, 400 });
+
+	sf::Text mWPMNum;
+	mWPMNum.setFont(arialbd);
+	mWPMNum.setCharacterSize(20);
+	mWPMNum.setFillColor(sf::Color::Color(0, 0, 0, 200));
+	mWPMNum.setPosition({ 652, 400 });
+	mWPMNum.setString("500");
+
+	sf::Text mWPM;
+	mWPM.setFont(arialbd);
+	mWPM.setCharacterSize(20);
+	mWPM.setFillColor(sf::Color::Color(0, 0, 0, 160));
+	mWPM.setPosition({ 690, 400 });
+	mWPM.setString("WPM");
 
 
 	// SETTINGS 
@@ -216,8 +234,10 @@ void SpeedReader::loop() {
 
 			if (event.type == sf::Event::KeyPressed) {
 				if (event.key.code == sf::Keyboard::Escape) {
-					if (_programState == MainDisplay)
+					if (_programState == MainDisplay) {
 						_programState = Settings;
+						_display.pause(_timer);
+					}
 					else
 						_programState = MainDisplay;
 				}
@@ -254,6 +274,9 @@ void SpeedReader::loop() {
 			sPauseButton.draw(_window);
 			sResetButton.draw(_window);
 			settingsButton.draw(_window);
+
+			_window.draw(mWPM);
+			_window.draw(mWPMNum);
 
 			if (!_display.isPaused())
 				_display.calculateWord(_timer);
@@ -292,6 +315,7 @@ void SpeedReader::loop() {
 
 			if (settingsButton.isClicked(_window)) {
 				_programState = Settings;
+				_display.pause(_timer);
 			}
 
 
