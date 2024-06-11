@@ -1,6 +1,7 @@
 #pragma once 
 #include <SFML/Graphics.hpp>
 #include "TextSplitter.h"
+#include "Settings.h"
 
 typedef std::vector<std::wstring> wordList;
 class TextDisplay {
@@ -9,37 +10,33 @@ public:
 
 	TextDisplay();
 
-	void setParent(sf::RectangleShape& parent);
-
 	void resetIndex();
 
 	void loadText(TextSplitter& splitter);
 
-	void calculateWord(sf::Clock& timer);
+	void calculateWord(sf::Clock& timer, int wordsPerMinute);
 
 	sf::Text getWord();
 
-	sf::RectangleShape getBackground();
+	void setCharacterSize(int size);
 
-	bool isLoaded();
-
-	bool isPaused();
+	void setFont(sf::Font font);
 
 	void pause(sf::Clock& timer);
 
 	void unpause(sf::Clock& timer);
 
-private:
+	bool isLoaded();
 
-	// To create BOX class
-	sf::RectangleShape _background;
+	bool isPaused();
+
+private:
 
 	wordList _wordList;
 
 	// To create WORD class
 	sf::Text _word;
 
-	// To create OPTION class
 	sf::Font _font;
 
 	sf::Vector2f _wordBounds;

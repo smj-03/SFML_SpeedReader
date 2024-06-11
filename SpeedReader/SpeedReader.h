@@ -3,31 +3,12 @@
 #include "ProgramState.h"
 #include "TextSplitter.h"
 #include "TextDisplay.h"
+#include "Settings.h"
 #include "Button.h"
 #include "SpriteButton.h"
 #include "TextButton.h"
 
 class SpeedReader {
-
-private:
-
-	ProgramState _programState;
-
-	sf::RenderWindow _window;
-
-	sf::Clock _timer;
-
-	TextSplitter _splitter;
-
-	TextDisplay _display;
-
-	std::wstring _text;
-
-	void handleButton(Button& button);
-
-	void handleButton(TextButton& button);
-
-	void handleButton(SpriteButton& button);
 
 public:
 
@@ -38,5 +19,29 @@ public:
 	void loop();
 
 	void loadResources();
+
+	void applySettings();
+
+private:
+
+	Settings m_settings;
+
+	ProgramState m_programState;
+
+	sf::RenderWindow m_window;
+
+	sf::Clock m_timer;
+
+	TextSplitter m_splitter;
+
+	TextDisplay m_display;
+
+	std::wstring m_text;
+
+	void handleButton(Button& button);
+
+	void handleButton(TextButton& button);
+
+	void handleButton(SpriteButton& button);
 
 };

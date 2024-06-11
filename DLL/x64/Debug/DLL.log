@@ -1,10 +1,8 @@
-﻿  FileExplorer.cpp
+﻿     Creating library P:\project\SpeedReader\x64\Debug\DLL.lib and object P:\project\SpeedReader\x64\Debug\DLL.exp
   DLL.vcxproj -> P:\project\SpeedReader\x64\Debug\DLL.dll
   P:\project\SpeedReader\DLL\API.h
-  P:\project\SpeedReader\DLL\Component.h
   P:\project\SpeedReader\DLL\FileExplorer.h
-  P:\project\SpeedReader\DLL\Test.h
-          4 file(s) copied.
+          2 file(s) copied.
   P:\project\SpeedReader\x64\Debug\DLL.dll
   P:\project\SpeedReader\x64\Debug\sfml-audio-d-2.dll
   P:\project\SpeedReader\x64\Debug\sfml-graphics-d-2.dll

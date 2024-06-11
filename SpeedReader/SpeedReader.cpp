@@ -4,12 +4,12 @@
 #include <FileExplorer.h>
 
 SpeedReader::SpeedReader() {
-	_window.create(sf::VideoMode(800, 450), "Speed Reader", sf::Style::Titlebar | sf::Style::Close);
-	_programState = ProgramState::MainDisplay;
+	m_window.create(sf::VideoMode(800, 450), "Speed Reader", sf::Style::Titlebar | sf::Style::Close);
+	m_programState = ProgramState::MainDisplay;
 
 	sf::Image icon;
 	icon.loadFromFile("icons/logo.png");
-	_window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
+	m_window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 }
 
 void SpeedReader::initialize() {}
@@ -24,7 +24,6 @@ void SpeedReader::loop() {
 	mainDisplay.setFillColor(sf::Color::Color(248, 249, 250, 255));
 	mainDisplay.setOutlineColor(sf::Color::Color(222, 226, 230, 255));
 	mainDisplay.setOutlineThickness(-1);
-	_display.setParent(mainDisplay);
 
 	TextButton textButton = TextButton("TEXT", { 100,25 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255), sf::Color::Color(0, 0, 0, 160));
 	textButton.setFont(arialbd);
@@ -92,7 +91,7 @@ void SpeedReader::loop() {
 	mWPMNum.setCharacterSize(20);
 	mWPMNum.setFillColor(sf::Color::Color(0, 0, 0, 200));
 	mWPMNum.setPosition({ 652, 400 });
-	mWPMNum.setString("500");
+	mWPMNum.setString(std::to_string(m_settings.getWPM()));
 
 	sf::Text mWPM;
 	mWPM.setFont(arialbd);
@@ -182,7 +181,7 @@ void SpeedReader::loop() {
 
 	sf::Font arial;
 	arial.loadFromFile("./fonts/arial.ttf");
-	TextButton sArial("Arial", {100, 25}, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255), sf::Color::Color(0, 0, 0, 200));
+	TextButton sArial("Arial", { 100, 25 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255), sf::Color::Color(0, 0, 0, 200));
 	sArial.setFont(arialbd);
 	sArial.setPosition({ 170, 254 });
 
@@ -220,67 +219,98 @@ void SpeedReader::loop() {
 
 	sf::Event event;
 	sf::Uint16 lastChar = 0;
-	while (_window.isOpen()) {
-		while (_window.pollEvent(event)) {
+	while (m_window.isOpen()) {
+		while (m_window.pollEvent(event)) {
+
 			if (event.type == sf::Event::Closed) {
-				_window.close();
+				m_window.close();
 			}
 
 			if (event.type == sf::Event::TextEntered) {
-				if (_programState == LoadText) {
+				if (m_programState == LoadText) {
 					lastChar = event.text.unicode;
 				}
 			}
 
 			if (event.type == sf::Event::KeyPressed) {
+
 				if (event.key.code == sf::Keyboard::Escape) {
-					if (_programState == MainDisplay) {
-						_programState = Settings;
-						_display.pause(_timer);
+					if (m_programState == MainDisplay) {
+						m_programState = SettingsMenu;
+						m_display.pause(m_timer);
 					}
 					else
-						_programState = MainDisplay;
+						m_programState = MainDisplay;
 				}
 
 				if (event.key.code == sf::Keyboard::Space) {
-					if (_programState == MainDisplay) {
-						if (_display.isPaused())
-							_display.unpause(_timer);
+					if (m_programState == MainDisplay) {
+						if (m_display.isPaused())
+							m_display.unpause(m_timer);
 						else
-							_display.pause(_timer);
+							m_display.pause(m_timer);
 					}
 				}
 
 				if (event.key.code == sf::Keyboard::R) {
-					if (_programState == MainDisplay) {
-						if (_display.isLoaded()) {
-							_display.resetIndex();
-							_window.draw(_display.getWord());
-							_display.pause(_timer);
+					if (m_programState == MainDisplay) {
+						if (m_display.isLoaded()) {
+							m_display.resetIndex();
+							m_window.draw(m_display.getWord());
+							m_display.pause(m_timer);
 						}
+					}
+				}
+
+				if (event.key.code == sf::Keyboard::RBracket) {
+					if (m_programState == MainDisplay) {
+						m_settings.incrementDisplayCharSize();
+						m_display.setCharacterSize(m_settings.getDisplayCharSize());
+
+					}
+				}
+
+				if (event.key.code == sf::Keyboard::LBracket) {
+					if (m_programState == MainDisplay) {
+						m_settings.decrementDisplayCharSize();
+						m_display.setCharacterSize(m_settings.getDisplayCharSize());
+					}
+				}
+
+				if (event.key.code == sf::Keyboard::Up) {
+					if (m_programState == MainDisplay) {
+						m_settings.incrementWPM();
+						mWPMNum.setString(std::to_string(m_settings.getWPM()));
+					}
+				}
+
+				if (event.key.code == sf::Keyboard::Down) {
+					if (m_programState == MainDisplay) {
+						m_settings.decrementWMP();
+						mWPMNum.setString(std::to_string(m_settings.getWPM()));
 					}
 				}
 			}
 		}
 		// Add settings for dark mode
-		_window.clear(sf::Color::White);
+		m_window.clear(sf::Color::White);
 
-		switch (_programState) {
+		switch (m_programState) {
 		case MainDisplay:
 
-			_window.draw(mainDisplay);
-			textButton.draw(_window);
-			sPlayButton.draw(_window);
-			sPauseButton.draw(_window);
-			sResetButton.draw(_window);
-			settingsButton.draw(_window);
+			m_window.draw(mainDisplay);
+			textButton.draw(m_window);
+			sPlayButton.draw(m_window);
+			sPauseButton.draw(m_window);
+			sResetButton.draw(m_window);
+			settingsButton.draw(m_window);
 
-			_window.draw(mWPM);
-			_window.draw(mWPMNum);
+			m_window.draw(mWPM);
+			m_window.draw(mWPMNum);
 
-			if (!_display.isPaused())
-				_display.calculateWord(_timer);
-			_window.draw(_display.getWord());
+			if (!m_display.isPaused())
+				m_display.calculateWord(m_timer, m_settings.getWPM());
+			m_window.draw(m_display.getWord());
 
 			if (event.type == sf::Event::MouseMoved) {
 
@@ -292,42 +322,42 @@ void SpeedReader::loop() {
 
 			}
 
-			if (textButton.isClicked(_window)) {
-				_display.pause(_timer);
-				_programState = LoadText;
+			if (textButton.isClicked(m_window)) {
+				m_display.pause(m_timer);
+				m_programState = LoadText;
 			}
 
-			if (sPlayButton.isClicked(_window)) {
-				_display.unpause(_timer);
+			if (sPlayButton.isClicked(m_window)) {
+				m_display.unpause(m_timer);
 			}
 
-			if (sPauseButton.isClicked(_window)) {
-				_display.pause(_timer);
+			if (sPauseButton.isClicked(m_window)) {
+				m_display.pause(m_timer);
 			}
 
-			if (sResetButton.isClicked(_window)) {
-				if (_display.isLoaded()) {
-					_display.resetIndex();
-					_window.draw(_display.getWord());
-					_display.pause(_timer);
+			if (sResetButton.isClicked(m_window)) {
+				if (m_display.isLoaded()) {
+					m_display.resetIndex();
+					m_window.draw(m_display.getWord());
+					m_display.pause(m_timer);
 				}
 			}
 
-			if (settingsButton.isClicked(_window)) {
-				_programState = Settings;
-				_display.pause(_timer);
+			if (settingsButton.isClicked(m_window)) {
+				m_programState = SettingsMenu;
+				m_display.pause(m_timer);
 			}
 
 
 			break;
 		case LoadText:
 
-			_window.draw(mainDisplay);
-			textBox.draw(_window);
-			clearButton.draw(_window);
-			saveButton.draw(_window);
-			loadButton.draw(_window);
-			returnButton.draw(_window);
+			m_window.draw(mainDisplay);
+			textBox.draw(m_window);
+			clearButton.draw(m_window);
+			saveButton.draw(m_window);
+			loadButton.draw(m_window);
+			returnButton.draw(m_window);
 
 			if (event.type == sf::Event::MouseMoved) {
 
@@ -339,15 +369,15 @@ void SpeedReader::loop() {
 
 			}
 
-			if (clearButton.isClicked(_window)) {
+			if (clearButton.isClicked(m_window)) {
 				textBox.clearText();
 			}
 
-			if (saveButton.isClicked(_window)) {
+			if (saveButton.isClicked(m_window)) {
 				FE.SaveFileContent(textBox.getText());
 			}
 
-			if (loadButton.isClicked(_window)) {
+			if (loadButton.isClicked(m_window)) {
 				std::wstring filePath = FE.OpenTextFileDialog();
 				if (filePath.empty()) {
 					std::wcerr << L"No file selected." << std::endl;
@@ -355,16 +385,16 @@ void SpeedReader::loop() {
 
 				std::wstring fileContent = FE.ReadFileContent(filePath);
 
-				_text = fileContent;
-				_splitter.setText(_text);
-				_splitter.chunkText(2);
-				_display.loadText(_splitter);
-				_timer.restart();
-				_programState = ProgramState::MainDisplay;
+				m_text = fileContent;
+				m_splitter.setText(m_text);
+				m_splitter.chunkText(2);
+				m_display.loadText(m_splitter);
+				m_timer.restart();
+				m_programState = ProgramState::MainDisplay;
 			}
 
-			if (returnButton.isClicked(_window)) {
-				_programState = ProgramState::MainDisplay;
+			if (returnButton.isClicked(m_window)) {
+				m_programState = ProgramState::MainDisplay;
 			}
 
 			if (lastChar != 0)
@@ -375,38 +405,38 @@ void SpeedReader::loop() {
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
 				std::wstring newText = textBox.getText();
 				if (!newText.empty()) {
-					_text = newText;
-					_splitter.setText(_text);
-					_splitter.chunkText(1);
-					_display.loadText(_splitter);
-					_timer.restart();
+					m_text = newText;
+					m_splitter.setText(m_text);
+					m_splitter.chunkText(1);
+					m_display.loadText(m_splitter);
+					m_timer.restart();
 				}
-				_programState = ProgramState::MainDisplay;
+				m_programState = ProgramState::MainDisplay;
 			}
 
 			//std::cout << "Loaded" << std::endl;
-			//_text = L"Gdzieś jest, lecz nie wiadomo gdzie Świat w ktorym baśń ta dzieje się Maleńka pszczółka mieszka w nim Co wieść chce wsród owadów prym";
-			//_splitter.setText(_text);
-			//_splitter.chunkText(2);
-			//_display.loadText(_splitter);
-			//_programState = ProgramState::MainDisplay;
+			//m_text = L"Gdzieś jest, lecz nie wiadomo gdzie Świat w ktorym baśń ta dzieje się Maleńka pszczółka mieszka w nim Co wieść chce wsród owadów prym";
+			//m_splitter.setText(m_text);
+			//m_splitter.chunkText(2);
+			//m_display.loadText(m_splitter);
+			//m_programState = ProgramState::MainDisplay;
 
 			break;
-		case Settings:
+		case SettingsMenu:
 
-			tempButt1.draw(_window);
-			tempButt2.draw(_window);
-			tempButt3.draw(_window);
-			tempButt4.draw(_window);
-			tempButt5.draw(_window);
-			tempButt6.draw(_window);
+			tempButt1.draw(m_window);
+			tempButt2.draw(m_window);
+			tempButt3.draw(m_window);
+			tempButt4.draw(m_window);
+			tempButt5.draw(m_window);
+			tempButt6.draw(m_window);
 
-			sArial.draw(_window);
-			sTimes.draw(_window);
-			sComic.draw(_window);
+			sArial.draw(m_window);
+			sTimes.draw(m_window);
+			sComic.draw(m_window);
 
-			sLight.draw(_window);
-			sDark.draw(_window);
+			sLight.draw(m_window);
+			sDark.draw(m_window);
 
 			if (event.type == sf::Event::MouseMoved) {
 
@@ -425,29 +455,29 @@ void SpeedReader::loop() {
 
 			}
 
-			_window.draw(sWPMNum);
-			_window.draw(sWPM);
+			m_window.draw(sWPMNum);
+			m_window.draw(sWPM);
 
-			_window.draw(sChunks);
-			_window.draw(sChunksNum);
+			m_window.draw(sChunks);
+			m_window.draw(sChunksNum);
 
-			_window.draw(sCharSize);
-			_window.draw(sCharSizeNum);
-			_window.draw(sFont);
-			_window.draw(sMode);
-			
-			returnButton.draw(_window);
+			m_window.draw(sCharSize);
+			m_window.draw(sCharSizeNum);
+			m_window.draw(sFont);
+			m_window.draw(sMode);
+
+			returnButton.draw(m_window);
 
 			break;
 		default:
 			break;
 		}
-		_window.display();
+		m_window.display();
 	}
 }
 
 void SpeedReader::handleButton(Button& button) {
-	if (button.isMouseOver(_window)) {
+	if (button.isMouseOver(m_window)) {
 		button.setBackColor(sf::Color::Color(240, 241, 242, 255));
 	}
 	else {
@@ -456,7 +486,7 @@ void SpeedReader::handleButton(Button& button) {
 }
 
 void SpeedReader::handleButton(TextButton& button) {
-	if (button.isMouseOver(_window)) {
+	if (button.isMouseOver(m_window)) {
 		button.setBackColor(sf::Color::Color(240, 241, 242, 255));
 		button.setTextColor(sf::Color::Color(0, 0, 0, 180));
 	}
@@ -467,7 +497,7 @@ void SpeedReader::handleButton(TextButton& button) {
 }
 
 void SpeedReader::handleButton(SpriteButton& button) {
-	if (button.isMouseOver(_window)) {
+	if (button.isMouseOver(m_window)) {
 		button.setBackColor(sf::Color::Color(240, 241, 242, 255));
 		button.setSpriteColor(sf::Color::Color(0, 0, 0, 180));
 	}
@@ -477,6 +507,9 @@ void SpeedReader::handleButton(SpriteButton& button) {
 	}
 }
 
+void SpeedReader::applySettings() {
+	m_display.setCharacterSize(m_settings.getDisplayCharSize());
+}
 
 void SpeedReader::loadResources() {
 

@@ -1,9 +1,7 @@
 ﻿  Scanning sources for module dependencies...
-  main.cpp
-P:\project\SpeedReader\SpeedReader\main.cpp(6,1): warning C4005: '_WIN32_WINNT': macro redefinition
-  D:\Windows Kits\10\Include\10.0.22621.0\shared\sdkddkver.h(224,1):
-  see previous definition of '_WIN32_WINNT'
-  
+  TextDisplay.cpp
+P:\project\SpeedReader\SpeedReader\TextDisplay.cpp(22,67): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+P:\project\SpeedReader\SpeedReader\TextDisplay.cpp(32,32): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
   SpeedReader.vcxproj -> P:\project\SpeedReader\x64\Debug\SpeedReader.exe
   P:\project\SpeedReader\x64\Debug\SpeedReader.exe
           1 file(s) copied.

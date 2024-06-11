@@ -7,18 +7,14 @@ TextDisplay::TextDisplay() {
 	_wordListSize = 0;
 	_currentIndex = 0;
 	_wordsPerMinute = 500;
-
-	_font.loadFromFile("fonts/arial.ttf");
+	
+	_font.loadFromFile("./fonts/arial.ttf");
 	_word.setFont(_font);
 	_word.setCharacterSize(50);
-	_word.setFillColor(sf::Color::Color(0, 0, 0, 200));
+	_word.setFillColor(sf::Color::Color(0, 0, 0, 120));
 
 	_word.setString("Welcome to Speed Reader!");
 	centerText();
-}
-
-void TextDisplay::setParent(sf::RectangleShape& parent){
-	_background = parent;
 }
 
 void TextDisplay::centerText() {
@@ -29,6 +25,7 @@ void TextDisplay::centerText() {
 
 void TextDisplay::loadText(TextSplitter& splitter) {
 	// if size == 0 throw error
+	_word.setFillColor(sf::Color::Color(0, 0, 0, 200));
 	_isLoaded = true;
 	_currentIndex = 0;
 	_wordList = splitter.getChunks();
@@ -46,17 +43,18 @@ sf::Text TextDisplay::getWord() {
 	return _word;
 }
 
-sf::RectangleShape TextDisplay::getBackground() {
-	return _background;
-}
-
-void TextDisplay::calculateWord(sf::Clock& timer) {
+void TextDisplay::calculateWord(sf::Clock& timer, int wordsPerMinute) {
 	_word.setString(_wordList[_currentIndex]);
 	centerText();
-	if (timer.getElapsedTime().asMilliseconds() >= (60.0 / _wordsPerMinute * 1000.0 * _chunkSize) && _currentIndex < (_wordListSize - 1)) {
+	if (timer.getElapsedTime().asMilliseconds() >= (60.0 / wordsPerMinute * 1000.0 * _chunkSize) && _currentIndex < (_wordListSize - 1)) {
 		_currentIndex++;
 		timer.restart();
 	}
+}
+
+void TextDisplay::setCharacterSize(int size) {
+	_word.setCharacterSize(size);
+	centerText();
 }
 
 bool TextDisplay::isPaused() {
@@ -81,3 +79,6 @@ void TextDisplay::resetIndex() {
 	centerText();
 }
 
+void TextDisplay::setFont(sf::Font font) {
+	_word.setFont(font);
+}
