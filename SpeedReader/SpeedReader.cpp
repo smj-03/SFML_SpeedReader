@@ -205,7 +205,7 @@ void SpeedReader::loop() {
 			}
 
 			if (saveButton.isClicked(_window)) {
-
+				FE.SaveFileContent(textBox.getText());
 			}
 
 			if (loadButton.isClicked(_window)) {

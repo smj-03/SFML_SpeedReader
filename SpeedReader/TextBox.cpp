@@ -187,3 +187,4 @@ void TextBox::deleteLastChar() {
 
 	m_textbox.setString(m_text.str());
 }
+
