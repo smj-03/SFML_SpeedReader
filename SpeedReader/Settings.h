@@ -23,11 +23,11 @@ public:
 
 	void incrementWPM();
 
-	void decrementWMP();
+	void decrementWPM();
 
 	void incrementWPF();
 
-	void decrementWMF();
+	void decrementWPF();
 
 	int getDisplayCharSize();
 

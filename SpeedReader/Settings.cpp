@@ -21,6 +21,10 @@ int Settings::getWPM() {
 	return m_wordsPerMinute;
 }
 
+int Settings::getWPF() {
+	return m_wordsPerFrame;
+}
+
 int Settings::getDisplayCharSize() {
 	return m_displayCharSize;
 }
@@ -30,19 +34,19 @@ void Settings::incrementWPM() {
 		m_wordsPerMinute += 5;
 }
 
-void Settings::decrementWMP() {
+void Settings::decrementWPM() {
 	if (m_wordsPerMinute > 100)
 		m_wordsPerMinute -= 5;
 }
 
 void Settings::incrementWPF() {
-	if (m_wordsPerFrame < 995)
-		m_wordsPerMinute += 5;
+	if (m_wordsPerFrame < 4)
+		m_wordsPerFrame++;
 }
 
-void Settings::decrementWMF() {
-	if (m_wordsPerFrame > 100)
-		m_wordsPerMinute -= 5;
+void Settings::decrementWPF() {
+	if (m_wordsPerFrame > 1)
+		m_wordsPerFrame--;
 }
 
 void Settings::setFont(FontStyle font) {

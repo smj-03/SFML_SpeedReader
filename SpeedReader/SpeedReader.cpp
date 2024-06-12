@@ -280,8 +280,44 @@ void SpeedReader::loop() {
 
 				if (event.key.code == sf::Keyboard::Down) {
 					if (m_programState == MainDisplay) {
-						m_settings.decrementWMP();
+						m_settings.decrementWPM();
 						mWPMNum.setString(std::to_string(m_settings.getWPM()));
+					}
+				}
+
+				if (event.key.code == sf::Keyboard::Up) {
+					if (m_programState == MainDisplay) {
+						m_settings.incrementWPM();
+						mWPMNum.setString(std::to_string(m_settings.getWPM()));
+					}
+				}
+
+				if (event.key.code == sf::Keyboard::Down) {
+					if (m_programState == MainDisplay) {
+						m_settings.decrementWPM();
+						mWPMNum.setString(std::to_string(m_settings.getWPM()));
+					}
+				}
+
+				if (event.key.code == sf::Keyboard::Left) {
+					if (m_programState == MainDisplay) {
+						m_settings.decrementWPF();
+						if (m_display.isLoaded()) {
+							m_splitter.chunkText(m_settings.getWPF());
+							m_display.loadText(m_splitter);
+							m_timer.restart();
+						}
+					}
+				}
+
+				if (event.key.code == sf::Keyboard::Right) {
+					if (m_programState == MainDisplay) {
+						m_settings.incrementWPF();
+						if (m_display.isLoaded()) {
+							m_splitter.chunkText(m_settings.getWPF());
+							m_display.loadText(m_splitter);
+							m_timer.restart();
+						}
 					}
 				}
 			}
@@ -381,7 +417,7 @@ void SpeedReader::loop() {
 
 				m_text = fileContent;
 				m_splitter.setText(m_text);
-				m_splitter.chunkText(2);
+				m_splitter.chunkText(m_settings.getWPF());
 				m_display.loadText(m_splitter);
 				m_timer.restart();
 				m_programState = ProgramState::MainDisplay;
@@ -401,7 +437,7 @@ void SpeedReader::loop() {
 				if (!newText.empty()) {
 					m_text = newText;
 					m_splitter.setText(m_text);
-					m_splitter.chunkText(1);
+					m_splitter.chunkText(m_settings.getWPF());
 					m_display.loadText(m_splitter);
 					m_timer.restart();
 				}
