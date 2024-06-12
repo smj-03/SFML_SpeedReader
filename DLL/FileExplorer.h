@@ -11,17 +11,18 @@
 #include <chrono>
 #include <exception>
 #include <direct.h>
+#include <ctime>
+#include <iomanip>
 
 class EXPORT_API FileExplorer {
 
 public:
-
-	std::wstring OpenTextFileDialog();
-
-	std::wstring ReadFileContent(const std::wstring& filePath);
-
-	void SaveFileContent(const std::wstring& content);
+    std::wstring OpenTextFileDialog();
+    std::wstring ReadFileContent(const std::wstring& filePath);
+    void SaveFileContent(const std::wstring& content);
 
 private:
+
+    std::wstring m_lastOpenedFilePath; 
 
 };

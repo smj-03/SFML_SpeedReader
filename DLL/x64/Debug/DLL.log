@@ -1,4 +1,9 @@
 ﻿  FileExplorer.cpp
+P:\project\SpeedReader\DLL\FileExplorer.h(26,18): warning C4251: 'FileExplorer::m_lastOpenedFilePath': class 'std::basic_string<wchar_t,std::char_traits<wchar_t>,std::allocator<wchar_t>>' needs to have dll-interface to be used by clients of class 'FileExplorer'
+  (compiling source file 'FileExplorer.cpp')
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\include\xstring(2337,7):
+  see declaration of 'std::basic_string<wchar_t,std::char_traits<wchar_t>,std::allocator<wchar_t>>'
+  
      Creating library P:\project\SpeedReader\x64\Debug\DLL.lib and object P:\project\SpeedReader\x64\Debug\DLL.exp
   DLL.vcxproj -> P:\project\SpeedReader\x64\Debug\DLL.dll
   P:\project\SpeedReader\DLL\API.h
