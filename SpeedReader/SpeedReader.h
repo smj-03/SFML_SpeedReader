@@ -9,6 +9,7 @@
 #include "TextButton.h"
 #include "TextBox.h"
 #include <FileExplorer.h>
+#include <algorithm> 
 
 class SpeedReader {
 

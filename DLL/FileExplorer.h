@@ -9,6 +9,7 @@
 #include <locale.h>    // For Polish signs
 #include <ctime>
 #include <chrono>
+#include <exception>
 
 class EXPORT_API FileExplorer {
 

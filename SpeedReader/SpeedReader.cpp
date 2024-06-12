@@ -201,8 +201,10 @@ void SpeedReader::loop() {
 				}
 
 				std::wstring fileContent = FE.ReadFileContent(filePath);
-
-				m_text = fileContent;
+				if (fileContent.empty())
+					m_text = L"Nie udało się wczytać tekstu :(";
+				else
+					m_text = fileContent;
 				m_splitter.setText(m_text);
 				m_splitter.chunkText(m_settings.getWPF());
 				m_display.loadText(m_splitter);
@@ -211,7 +213,12 @@ void SpeedReader::loop() {
 			}
 
 			if (m_textButts[3].isClicked(m_window)) {
-				FE.SaveFileContent(m_inputBox.getText());
+				auto newText = m_inputBox.getText();
+				bool containsLetter = std::any_of(newText.begin(), newText.end(), [](wchar_t c) {
+					return std::isalpha(c);
+					});
+				if(!newText.empty() && containsLetter)
+					FE.SaveFileContent(newText);
 			}
 
 			if (m_spriteButts[4].isClicked(m_window)) {
@@ -225,7 +232,10 @@ void SpeedReader::loop() {
 
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
 				std::wstring newText = m_inputBox.getText();
-				if (!newText.empty()) {
+				bool containsLetter = std::any_of(newText.begin(), newText.end(), [](wchar_t c) {
+					return std::isalpha(c);
+					});
+				if (!newText.empty() && containsLetter) {
 					m_text = newText;
 					m_splitter.setText(m_text);
 					m_splitter.chunkText(m_settings.getWPF());
@@ -254,7 +264,7 @@ void SpeedReader::loop() {
 			m_window.draw(m_staticTexts[4]);
 			m_window.draw(m_staticTexts[5]);
 			m_window.draw(m_staticTexts[6]);
-		
+
 
 
 			if (event.type == sf::Event::MouseMoved) {
@@ -328,23 +338,55 @@ void SpeedReader::applySettings() {
 }
 
 void SpeedReader::loadResources() {
-	// DO ERROR HANDLING
-	m_appIcon.loadFromFile("icons/logo.png");
 
-	m_resetIcon.loadFromFile("icons/reset-icon.png");
-	m_playIcon.loadFromFile("icons/play-icon.png");
-	m_stopIcon.loadFromFile("icons/pause-icon.png");
-	m_backIcon.loadFromFile("icons/return-icon.png");
-	m_settIcon.loadFromFile("icons/setting-icon.png");
+	if (!m_appIcon.loadFromFile("icons/logo.png")) {
+		throw;
+	}
 
-	arial.loadFromFile("fonts/arial.ttf");
-	arialbd.loadFromFile("fonts/arialbd.ttf");
+	if (!m_resetIcon.loadFromFile("icons/reset-icon.png")) {
+		throw;
+	}
 
-	times.loadFromFile("fonts/times.ttf");
-	timesbd.loadFromFile("fonts/timesbd.ttf");
+	if (!m_playIcon.loadFromFile("icons/play-icon.png")) {
+		throw;
+	}
 
-	comic.loadFromFile("fonts/comic.ttf");
-	comicbd.loadFromFile("fonts/comicbd.ttf");
+	if (!m_stopIcon.loadFromFile("icons/pause-icon.png")) {
+		throw;
+	}
+
+	if (!m_backIcon.loadFromFile("icons/return-icon.png")) {
+		throw;
+	}
+
+	if (!m_settIcon.loadFromFile("icons/setting-icon.png")) {
+		throw;
+	}
+
+	if (!arial.loadFromFile("fonts/arial.ttf")) {
+		throw;
+	}
+
+	if (!arialbd.loadFromFile("fonts/arialbd.ttf")) {
+		throw;
+	}
+
+	if (!times.loadFromFile("fonts/times.ttf")) {
+		throw;
+	}
+
+	if (!timesbd.loadFromFile("fonts/timesbd.ttf")) {
+		throw;
+	}
+
+	if (!comic.loadFromFile("fonts/comic.ttf")) {
+		throw;
+	}
+
+	if (!comicbd.loadFromFile("fonts/comicbd.ttf")) {
+		throw;
+	}
+
 }
 
 void SpeedReader::initialize() {

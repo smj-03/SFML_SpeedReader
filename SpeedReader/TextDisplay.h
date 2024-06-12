@@ -1,5 +1,6 @@
 #pragma once 
 #include <SFML/Graphics.hpp>
+#include <exception>
 #include "TextSplitter.h"
 #include "Settings.h"
 

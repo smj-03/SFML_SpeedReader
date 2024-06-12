@@ -39,11 +39,17 @@ sf::Text TextDisplay::getWord() {
 }
 
 void TextDisplay::calculateWord(sf::Clock& timer, int wordsPerMinute) {
-	_word.setString(_wordList[_currentIndex]);
-	centerText();
-	if (timer.getElapsedTime().asMilliseconds() >= (60.0 / wordsPerMinute * 1000.0 * _chunkSize) && _currentIndex < (_wordListSize - 1)) {
-		_currentIndex++;
-		timer.restart();
+	try {
+		_word.setString(_wordList[_currentIndex]);
+		centerText();
+		if (timer.getElapsedTime().asMilliseconds() >= (60.0 / wordsPerMinute * 1000.0 * _chunkSize) && _currentIndex < (_wordListSize - 1)) {
+			_currentIndex++;
+			timer.restart();
+		}
+	}
+	catch (const std::exception& e) {
+		_isLoaded = false;
+		_word.setString("404");
 	}
 }
 
