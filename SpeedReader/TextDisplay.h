@@ -32,14 +32,14 @@ public:
 
 	bool isPaused();
 
+	void centerText();
+
 private:
 
 	wordList _wordList;
 
 	// To create WORD class
 	sf::Text _word;
-
-	sf::Font _font;
 
 	sf::Vector2f _wordBounds;
 
@@ -54,7 +54,5 @@ private:
 	bool _isPaused;
 
 	bool _isLoaded;
-
-	void centerText();
 
 };

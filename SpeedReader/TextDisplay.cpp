@@ -8,13 +8,8 @@ TextDisplay::TextDisplay() {
 	_currentIndex = 0;
 	_wordsPerMinute = 500;
 	
-	//_font.loadFromFile("./fonts/times.ttf");
-	//_word.setFont(_font);
 	_word.setCharacterSize(50);
 	_word.setFillColor(sf::Color::Color(0, 0, 0, 120));
-
-	//_word.setString("Welcome to Speed Reader!");
-	centerText();
 }
 
 void TextDisplay::centerText() {
@@ -85,6 +80,5 @@ void TextDisplay::setWord(const std::string& text) {
 }
 
 void TextDisplay::setFont(sf::Font& font) {
-	_font = font;
 	_word.setFont(font);
 }

@@ -170,9 +170,6 @@ void TextBox::inputLogic(int charTyped) {
 			deleteLastChar();
 		}
 	}
-	if (!(m_text.str().length() % 35)) {
-		m_text << L"\n";
-	}
 	m_textbox.setString(m_text.str() + L"_");
 }
 

@@ -34,7 +34,7 @@ void SpeedReader::loop() {
 	if (!resetIcon.loadFromFile("icons/reset-icon.png")) {
 		std::cout << "pupa";
 	}
-	SpriteButton sResetButton = SpriteButton(resetIcon, { 0.55, 0.55 }, { 25, 25 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255));
+	SpriteButton sResetButton = SpriteButton(resetIcon, { 0.55f, 0.55f}, { 25, 25 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255));
 	sResetButton.setSpriteColor(sf::Color::Color(0, 0, 0, 160));
 	sResetButton.setPosition({ 140, 400 });
 
@@ -42,7 +42,7 @@ void SpeedReader::loop() {
 	if (!playIcon.loadFromFile("icons/play-icon.png")) {
 		std::cout << "pupa";
 	}
-	SpriteButton sPlayButton = SpriteButton(playIcon, { 0.6, 0.6 }, { 25, 25 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255));
+	SpriteButton sPlayButton = SpriteButton(playIcon, { 0.6f, 0.6f }, { 25, 25 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255));
 	sPlayButton.setSpriteColor(sf::Color::Color(0, 0, 0, 160));
 	sPlayButton.setPosition({ 180, 400 });
 	//sPlayButton.moveSprite({ 1, 0 });
@@ -51,7 +51,7 @@ void SpeedReader::loop() {
 	if (!pauseIcon.loadFromFile("icons/pause-icon.png")) {
 		std::cout << "pupa";
 	}
-	SpriteButton sPauseButton = SpriteButton(pauseIcon, { 0.6, 0.6 }, { 25, 25 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255));
+	SpriteButton sPauseButton = SpriteButton(pauseIcon, { 0.6f, 0.6f }, { 25, 25 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255));
 	sPauseButton.setSpriteColor(sf::Color::Color(0, 0, 0, 160));
 	sPauseButton.setPosition({ 220, 400 });
 
@@ -83,7 +83,7 @@ void SpeedReader::loop() {
 	if (!returnIcon.loadFromFile("icons/return-icon.png")) {
 		std::cout << "pupa";
 	}
-	SpriteButton returnButton = SpriteButton(returnIcon, { 0.9, 0.9 }, { 25, 25 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255));
+	SpriteButton returnButton = SpriteButton(returnIcon, { 0.9f, 0.9f }, { 25, 25 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255));
 	returnButton.setSpriteColor(sf::Color::Color(0, 0, 0, 160));
 	returnButton.setPosition({ 750, 400 });
 
@@ -185,11 +185,11 @@ void SpeedReader::loop() {
 	sArial.setPosition({ 170, 254 });
 
 	TextButton sTimes("Times New Roman", { 200, 25 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255), sf::Color::Color(0, 0, 0, 200));
-	sTimes.setFont(times);
+	sTimes.setFont(timesbd);
 	sTimes.setPosition({ 290, 254 });
 
 	TextButton sComic("Comic Sans MS", { 200, 25 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255), sf::Color::Color(0, 0, 0, 200));
-	sComic.setFont(comic);
+	sComic.setFont(comicbd);
 	sComic.setPosition({ 510, 254 });
 
 
@@ -432,6 +432,19 @@ void SpeedReader::loop() {
 			sLight.draw(m_window);
 			sDark.draw(m_window);
 
+			m_window.draw(sWPMNum);
+			m_window.draw(sWPM);
+
+			m_window.draw(sChunks);
+			m_window.draw(sChunksNum);
+
+			m_window.draw(sCharSize);
+			m_window.draw(sCharSizeNum);
+			m_window.draw(sFont);
+			m_window.draw(sMode);
+
+			returnButton.draw(m_window);
+
 			if (event.type == sf::Event::MouseMoved) {
 
 				handleButton(tempButt1);
@@ -449,18 +462,23 @@ void SpeedReader::loop() {
 
 			}
 
-			m_window.draw(sWPMNum);
-			m_window.draw(sWPM);
+			if(sArial.isClicked(m_window)) {
+				m_display.setFont(arial);
+				m_display.centerText();
+				m_programState = MainDisplay;
+			}
 
-			m_window.draw(sChunks);
-			m_window.draw(sChunksNum);
+			if(sTimes.isClicked(m_window)) {
+				m_display.setFont(times);
+				m_display.centerText();
+				m_programState = MainDisplay;
+			}
 
-			m_window.draw(sCharSize);
-			m_window.draw(sCharSizeNum);
-			m_window.draw(sFont);
-			m_window.draw(sMode);
-
-			returnButton.draw(m_window);
+			if(sComic.isClicked(m_window)) {
+				m_display.setFont(comic);
+				m_display.centerText();
+				m_programState = MainDisplay;
+			}
 
 			break;
 		default:
@@ -513,6 +531,6 @@ void SpeedReader::loadResources() {
 	times.loadFromFile("fonts/times.ttf");
 	timesbd.loadFromFile("fonts/timesbd.ttf");
 
-	comic.loadFromFile("fonts/times.ttf");
+	comic.loadFromFile("fonts/comic.ttf");
 	comicbd.loadFromFile("fonts/comicbd.ttf");
 }
