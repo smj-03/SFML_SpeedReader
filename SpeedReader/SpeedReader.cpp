@@ -91,15 +91,29 @@ void SpeedReader::loop() {
 	mWPMNum.setFont(arialbd);
 	mWPMNum.setCharacterSize(20);
 	mWPMNum.setFillColor(sf::Color::Color(0, 0, 0, 200));
-	mWPMNum.setPosition({ 652, 400 });
+	mWPMNum.setPosition({ 575, 400 });
 	mWPMNum.setString(std::to_string(m_settings.getWPM()));
 
 	sf::Text mWPM;
 	mWPM.setFont(arialbd);
 	mWPM.setCharacterSize(20);
 	mWPM.setFillColor(sf::Color::Color(0, 0, 0, 160));
-	mWPM.setPosition({ 690, 400 });
+	mWPM.setPosition({ 613, 400 });
 	mWPM.setString("WPM");
+
+	sf::Text mWPFNum;
+	mWPFNum.setFont(arialbd);
+	mWPFNum.setCharacterSize(20);
+	mWPFNum.setFillColor(sf::Color::Color(0, 0, 0, 200));
+	mWPFNum.setPosition({ 675, 400 });
+	mWPFNum.setString(std::to_string(m_settings.getWPF()));
+
+	sf::Text mWPF;
+	mWPF.setFont(arialbd);
+	mWPF.setCharacterSize(20);
+	mWPF.setFillColor(sf::Color::Color(0, 0, 0, 160));
+	mWPF.setPosition({ 690, 400 });
+	mWPF.setString("WPF");
 
 
 	// SETTINGS 
@@ -119,7 +133,7 @@ void SpeedReader::loop() {
 	sWPMNum.setCharacterSize(25);
 	sWPMNum.setFillColor(sf::Color::Color(0, 0, 0, 200));
 	sWPMNum.setPosition({ 350, 75 });
-	sWPMNum.setString("400");
+	sWPMNum.setString("500");
 
 	Button tempButt1({ 25, 12 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255));
 	tempButt1.setPosition({ 400 , 78 });
@@ -302,6 +316,7 @@ void SpeedReader::loop() {
 				if (event.key.code == sf::Keyboard::Left) {
 					if (m_programState == MainDisplay) {
 						m_settings.decrementWPF();
+						mWPFNum.setString(std::to_string(m_settings.getWPF()));
 						if (m_display.isLoaded()) {
 							m_splitter.chunkText(m_settings.getWPF());
 							m_display.loadText(m_splitter);
@@ -313,6 +328,7 @@ void SpeedReader::loop() {
 				if (event.key.code == sf::Keyboard::Right) {
 					if (m_programState == MainDisplay) {
 						m_settings.incrementWPF();
+						mWPFNum.setString(std::to_string(m_settings.getWPF()));
 						if (m_display.isLoaded()) {
 							m_splitter.chunkText(m_settings.getWPF());
 							m_display.loadText(m_splitter);
@@ -337,6 +353,9 @@ void SpeedReader::loop() {
 
 			m_window.draw(mWPM);
 			m_window.draw(mWPMNum);
+
+			m_window.draw(mWPF);
+			m_window.draw(mWPFNum);
 
 			if (!m_display.isPaused())
 				m_display.calculateWord(m_timer, m_settings.getWPM());

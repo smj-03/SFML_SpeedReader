@@ -30,7 +30,7 @@ int Settings::getDisplayCharSize() {
 }
 
 void Settings::incrementWPM() {
-	if (m_wordsPerMinute < 995) 
+	if (m_wordsPerMinute < 900) 
 		m_wordsPerMinute += 5;
 }
 
@@ -40,7 +40,7 @@ void Settings::decrementWPM() {
 }
 
 void Settings::incrementWPF() {
-	if (m_wordsPerFrame < 4)
+	if (m_wordsPerFrame < 3)
 		m_wordsPerFrame++;
 }
 
