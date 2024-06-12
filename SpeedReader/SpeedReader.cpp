@@ -1,125 +1,15 @@
 ﻿#include "SpeedReader.h"
 #include <iostream>
-#include "TextBox.h"
-#include <FileExplorer.h>
+
 
 SpeedReader::SpeedReader() {
 	m_window.create(sf::VideoMode(800, 450), "Speed Reader", sf::Style::Titlebar | sf::Style::Close);
 	m_programState = ProgramState::MainDisplay;
-
-	sf::Image icon;
-	icon.loadFromFile("icons/logo.png");
-	m_window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
-
 }
-
-void SpeedReader::initialize() {}
 
 void SpeedReader::loop() {
 
-	m_display.setFont(arial);
-	m_display.setWord("Welcome to Speed Reader!");
-
-	sf::RectangleShape mainDisplay(sf::Vector2f(750, 350));
-	mainDisplay.setPosition(25, 25);
-	mainDisplay.setFillColor(sf::Color::Color(248, 249, 250, 255));
-	mainDisplay.setOutlineColor(sf::Color::Color(222, 226, 230, 255));
-	mainDisplay.setOutlineThickness(-1);
-
-	TextButton textButton = TextButton("TEXT", { 100,25 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255), sf::Color::Color(0, 0, 0, 160));
-	textButton.setFont(arialbd);
-	textButton.setPosition({ 25,400 });
-
-	sf::Texture resetIcon;
-	if (!resetIcon.loadFromFile("icons/reset-icon.png")) {
-		std::cout << "pupa";
-	}
-	SpriteButton sResetButton = SpriteButton(resetIcon, { 0.55f, 0.55f}, { 25, 25 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255));
-	sResetButton.setSpriteColor(sf::Color::Color(0, 0, 0, 160));
-	sResetButton.setPosition({ 140, 400 });
-
-	sf::Texture playIcon;
-	if (!playIcon.loadFromFile("icons/play-icon.png")) {
-		std::cout << "pupa";
-	}
-	SpriteButton sPlayButton = SpriteButton(playIcon, { 0.6f, 0.6f }, { 25, 25 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255));
-	sPlayButton.setSpriteColor(sf::Color::Color(0, 0, 0, 160));
-	sPlayButton.setPosition({ 180, 400 });
-	//sPlayButton.moveSprite({ 1, 0 });
-
-	sf::Texture pauseIcon;
-	if (!pauseIcon.loadFromFile("icons/pause-icon.png")) {
-		std::cout << "pupa";
-	}
-	SpriteButton sPauseButton = SpriteButton(pauseIcon, { 0.6f, 0.6f }, { 25, 25 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255));
-	sPauseButton.setSpriteColor(sf::Color::Color(0, 0, 0, 160));
-	sPauseButton.setPosition({ 220, 400 });
-
-	sf::Texture settingsIcon;
-	if (!settingsIcon.loadFromFile("icons/setting-icon.png")) {
-		std::cout << "pupa";
-	}
-	SpriteButton settingsButton = SpriteButton(settingsIcon, { 0.75, 0.75 }, { 25, 25 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255));
-	settingsButton.setSpriteColor(sf::Color::Color(0, 0, 0, 160));
-	settingsButton.setPosition({ 750, 400 });
-
-	TextBox textBox(24, sf::Color::Color(0, 0, 0, 200), true);
-	textBox.setFont(arialbd);
-	textBox.setPosition({ 30, 25 });
-
-	TextButton clearButton = TextButton("CLEAR", { 100,25 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255), sf::Color::Color(0, 0, 0, 160));
-	clearButton.setFont(arialbd);
-	clearButton.setPosition({ 25,400 });
-
-	TextButton loadButton = TextButton("LOAD", { 100,25 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255), sf::Color::Color(0, 0, 0, 160));
-	loadButton.setFont(arialbd);
-	loadButton.setPosition({ 140,400 });
-
-	TextButton saveButton = TextButton("SAVE", { 100,25 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255), sf::Color::Color(0, 0, 0, 160));
-	saveButton.setFont(arialbd);
-	saveButton.setPosition({ 255,400 });
-
-	sf::Texture returnIcon;
-	if (!returnIcon.loadFromFile("icons/return-icon.png")) {
-		std::cout << "pupa";
-	}
-	SpriteButton returnButton = SpriteButton(returnIcon, { 0.9f, 0.9f }, { 25, 25 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255));
-	returnButton.setSpriteColor(sf::Color::Color(0, 0, 0, 160));
-	returnButton.setPosition({ 750, 400 });
-
-	sf::Text mWPMNum;
-	mWPMNum.setFont(arialbd);
-	mWPMNum.setCharacterSize(20);
-	mWPMNum.setFillColor(sf::Color::Color(0, 0, 0, 200));
-	mWPMNum.setPosition({ 575, 400 });
-	mWPMNum.setString(std::to_string(m_settings.getWPM()));
-
-	sf::Text mWPM;
-	mWPM.setFont(arialbd);
-	mWPM.setCharacterSize(20);
-	mWPM.setFillColor(sf::Color::Color(0, 0, 0, 160));
-	mWPM.setPosition({ 613, 400 });
-	mWPM.setString("WPM");
-
-	sf::Text mWPFNum;
-	mWPFNum.setFont(arialbd);
-	mWPFNum.setCharacterSize(20);
-	mWPFNum.setFillColor(sf::Color::Color(0, 0, 0, 200));
-	mWPFNum.setPosition({ 675, 400 });
-	mWPFNum.setString(std::to_string(m_settings.getWPF()));
-
-	sf::Text mWPF;
-	mWPF.setFont(arialbd);
-	mWPF.setCharacterSize(20);
-	mWPF.setFillColor(sf::Color::Color(0, 0, 0, 160));
-	mWPF.setPosition({ 690, 400 });
-	mWPF.setString("WPF");
-
-
 	// SETTINGS 
-	// zrobic klase QuickText : sf::Text
-
-	// WPM
 
 	sf::Text sWPM;
 	sWPM.setFont(arialbd);
@@ -288,35 +178,21 @@ void SpeedReader::loop() {
 				if (event.key.code == sf::Keyboard::Up) {
 					if (m_programState == MainDisplay) {
 						m_settings.incrementWPM();
-						mWPMNum.setString(std::to_string(m_settings.getWPM()));
+						m_dynamicTexts[0].setString(std::to_string(m_settings.getWPM()));
 					}
 				}
 
 				if (event.key.code == sf::Keyboard::Down) {
 					if (m_programState == MainDisplay) {
 						m_settings.decrementWPM();
-						mWPMNum.setString(std::to_string(m_settings.getWPM()));
-					}
-				}
-
-				if (event.key.code == sf::Keyboard::Up) {
-					if (m_programState == MainDisplay) {
-						m_settings.incrementWPM();
-						mWPMNum.setString(std::to_string(m_settings.getWPM()));
-					}
-				}
-
-				if (event.key.code == sf::Keyboard::Down) {
-					if (m_programState == MainDisplay) {
-						m_settings.decrementWPM();
-						mWPMNum.setString(std::to_string(m_settings.getWPM()));
+						m_dynamicTexts[0].setString(std::to_string(m_settings.getWPM()));
 					}
 				}
 
 				if (event.key.code == sf::Keyboard::Left) {
 					if (m_programState == MainDisplay) {
 						m_settings.decrementWPF();
-						mWPFNum.setString(std::to_string(m_settings.getWPF()));
+						m_dynamicTexts[1].setString(std::to_string(m_settings.getWPF()));
 						if (m_display.isLoaded()) {
 							m_splitter.chunkText(m_settings.getWPF());
 							m_display.loadText(m_splitter);
@@ -328,7 +204,7 @@ void SpeedReader::loop() {
 				if (event.key.code == sf::Keyboard::Right) {
 					if (m_programState == MainDisplay) {
 						m_settings.incrementWPF();
-						mWPFNum.setString(std::to_string(m_settings.getWPF()));
+						m_dynamicTexts[1].setString(std::to_string(m_settings.getWPF()));
 						if (m_display.isLoaded()) {
 							m_splitter.chunkText(m_settings.getWPF());
 							m_display.loadText(m_splitter);
@@ -344,18 +220,18 @@ void SpeedReader::loop() {
 		switch (m_programState) {
 		case MainDisplay:
 
-			m_window.draw(mainDisplay);
-			textButton.draw(m_window);
-			sPlayButton.draw(m_window);
-			sPauseButton.draw(m_window);
-			sResetButton.draw(m_window);
-			settingsButton.draw(m_window);
+			m_window.draw(m_mainFrame);
+			m_textButts[0].draw(m_window);
+			m_spriteButts[0].draw(m_window);
+			m_spriteButts[1].draw(m_window);
+			m_spriteButts[2].draw(m_window);
+			m_spriteButts[3].draw(m_window);
 
-			m_window.draw(mWPM);
-			m_window.draw(mWPMNum);
+			m_window.draw(m_staticTexts[0]);
+			m_window.draw(m_dynamicTexts[0]);
 
-			m_window.draw(mWPF);
-			m_window.draw(mWPFNum);
+			m_window.draw(m_staticTexts[1]);
+			m_window.draw(m_dynamicTexts[1]);
 
 			if (!m_display.isPaused())
 				m_display.calculateWord(m_timer, m_settings.getWPM());
@@ -363,28 +239,20 @@ void SpeedReader::loop() {
 
 			if (event.type == sf::Event::MouseMoved) {
 
-				handleButton(textButton);
-				handleButton(sResetButton);
-				handleButton(sPlayButton);
-				handleButton(sPauseButton);
-				handleButton(settingsButton);
+				handleButton(m_textButts[0]);
+				handleButton(m_spriteButts[0]);
+				handleButton(m_spriteButts[1]);
+				handleButton(m_spriteButts[2]);
+				handleButton(m_spriteButts[3]);
 
 			}
 
-			if (textButton.isClicked(m_window)) {
+			if (m_textButts[0].isClicked(m_window)) {
 				m_display.pause(m_timer);
 				m_programState = LoadText;
 			}
 
-			if (sPlayButton.isClicked(m_window)) {
-				m_display.unpause(m_timer);
-			}
-
-			if (sPauseButton.isClicked(m_window)) {
-				m_display.pause(m_timer);
-			}
-
-			if (sResetButton.isClicked(m_window)) {
+			if (m_spriteButts[0].isClicked(m_window)) {
 				if (m_display.isLoaded()) {
 					m_display.resetIndex();
 					m_window.draw(m_display.getWord());
@@ -392,7 +260,15 @@ void SpeedReader::loop() {
 				}
 			}
 
-			if (settingsButton.isClicked(m_window)) {
+			if (m_spriteButts[1].isClicked(m_window)) {
+				m_display.unpause(m_timer);
+			}
+
+			if (m_spriteButts[2].isClicked(m_window)) {
+				m_display.pause(m_timer);
+			}
+
+			if (m_spriteButts[3].isClicked(m_window)) {
 				m_programState = SettingsMenu;
 				m_display.pause(m_timer);
 			}
@@ -401,32 +277,29 @@ void SpeedReader::loop() {
 			break;
 		case LoadText:
 
-			m_window.draw(mainDisplay);
-			textBox.draw(m_window);
-			clearButton.draw(m_window);
-			saveButton.draw(m_window);
-			loadButton.draw(m_window);
-			returnButton.draw(m_window);
+			m_window.draw(m_mainFrame);
+
+			m_inputBox.draw(m_window);
+
+			m_textButts[1].draw(m_window);
+			m_textButts[2].draw(m_window);
+			m_textButts[3].draw(m_window);
+
+			m_spriteButts[4].draw(m_window);
 
 			if (event.type == sf::Event::MouseMoved) {
 
-				handleButton(textButton);
-				handleButton(clearButton);
-				handleButton(saveButton);
-				handleButton(loadButton);
-				handleButton(returnButton);
+				handleButton(m_textButts[1]);
+				handleButton(m_textButts[2]);
+				handleButton(m_textButts[3]);
 
 			}
 
-			if (clearButton.isClicked(m_window)) {
-				textBox.clearText();
+			if (m_textButts[1].isClicked(m_window)) {
+				m_inputBox.clearText();
 			}
 
-			if (saveButton.isClicked(m_window)) {
-				FE.SaveFileContent(textBox.getText());
-			}
-
-			if (loadButton.isClicked(m_window)) {
+			if (m_textButts[2].isClicked(m_window)) {
 				std::wstring filePath = FE.OpenTextFileDialog();
 				if (filePath.empty()) {
 					std::wcerr << L"No file selected." << std::endl;
@@ -442,17 +315,21 @@ void SpeedReader::loop() {
 				m_programState = ProgramState::MainDisplay;
 			}
 
-			if (returnButton.isClicked(m_window)) {
+			if (m_textButts[3].isClicked(m_window)) {
+				FE.SaveFileContent(m_inputBox.getText());
+			}
+
+			if (m_spriteButts[4].isClicked(m_window)) {
 				m_programState = ProgramState::MainDisplay;
 			}
 
 			if (lastChar != 0)
-				textBox.typedOn(lastChar);
+				m_inputBox.typedOn(lastChar);
 
 			lastChar = 0;
 
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
-				std::wstring newText = textBox.getText();
+				std::wstring newText = m_inputBox.getText();
 				if (!newText.empty()) {
 					m_text = newText;
 					m_splitter.setText(m_text);
@@ -462,13 +339,6 @@ void SpeedReader::loop() {
 				}
 				m_programState = ProgramState::MainDisplay;
 			}
-
-			//std::cout << "Loaded" << std::endl;
-			//m_text = L"Gdzieś jest, lecz nie wiadomo gdzie Świat w ktorym baśń ta dzieje się Maleńka pszczółka mieszka w nim Co wieść chce wsród owadów prym";
-			//m_splitter.setText(m_text);
-			//m_splitter.chunkText(2);
-			//m_display.loadText(m_splitter);
-			//m_programState = ProgramState::MainDisplay;
 
 			break;
 		case SettingsMenu:
@@ -498,7 +368,7 @@ void SpeedReader::loop() {
 			m_window.draw(sFont);
 			m_window.draw(sMode);
 
-			returnButton.draw(m_window);
+			m_spriteButts[4].draw(m_window);
 
 			if (event.type == sf::Event::MouseMoved) {
 
@@ -511,25 +381,25 @@ void SpeedReader::loop() {
 				handleButton(sArial);
 				handleButton(sTimes);
 				handleButton(sComic);
-				handleButton(returnButton);
+				handleButton(m_spriteButts[4]);
 				//handleButton(sDark);
 				handleButton(sLight);
 
 			}
 
-			if(sArial.isClicked(m_window)) {
+			if (sArial.isClicked(m_window)) {
 				m_display.setFont(arial);
 				m_display.centerText();
 				m_programState = MainDisplay;
 			}
 
-			if(sTimes.isClicked(m_window)) {
+			if (sTimes.isClicked(m_window)) {
 				m_display.setFont(times);
 				m_display.centerText();
 				m_programState = MainDisplay;
 			}
 
-			if(sComic.isClicked(m_window)) {
+			if (sComic.isClicked(m_window)) {
 				m_display.setFont(comic);
 				m_display.centerText();
 				m_programState = MainDisplay;
@@ -580,6 +450,14 @@ void SpeedReader::applySettings() {
 
 void SpeedReader::loadResources() {
 	// DO ERROR HANDLING
+	m_appIcon.loadFromFile("icons/logo.png");
+
+	m_resetIcon.loadFromFile("icons/reset-icon.png");
+	m_playIcon.loadFromFile("icons/play-icon.png");
+	m_stopIcon.loadFromFile("icons/pause-icon.png");
+	m_backIcon.loadFromFile("icons/return-icon.png");
+	m_settIcon.loadFromFile("icons/setting-icon.png");
+
 	arial.loadFromFile("fonts/arial.ttf");
 	arialbd.loadFromFile("fonts/arialbd.ttf");
 
@@ -588,4 +466,118 @@ void SpeedReader::loadResources() {
 
 	comic.loadFromFile("fonts/comic.ttf");
 	comicbd.loadFromFile("fonts/comicbd.ttf");
+}
+
+void SpeedReader::initialize() {
+	m_window.setIcon(m_appIcon.getSize().x, m_appIcon.getSize().y, m_appIcon.getPixelsPtr());
+
+	m_lightBgColor = sf::Color::Color(248, 249, 250, 255);
+	m_lightOutColor = sf::Color::Color(222, 226, 230, 255);
+
+	m_display.setFont(arial);
+	m_display.setWord("Welcome to Speed Reader!");
+
+	m_mainFrame.setSize({ 750, 350 });
+	m_mainFrame.setPosition(25, 25);
+	m_mainFrame.setFillColor(m_lightBgColor);
+	m_mainFrame.setOutlineColor(m_lightOutColor);
+	m_mainFrame.setOutlineThickness(-1);
+
+	m_inputBox = TextBox(24, sf::Color::Color(0, 0, 0, 200), true);
+	m_inputBox.setFont(arialbd);
+	m_inputBox.setPosition({ 30, 25 });
+
+	// MAIN PAGE
+	// --------------------------------------------------------------
+	// textButts [0]
+	TextButton mainTextButt = TextButton("TEXT", { 100,25 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255), sf::Color::Color(0, 0, 0, 160));
+	mainTextButt.setFont(arialbd);
+	mainTextButt.setPosition({ 25,400 });
+	m_textButts.push_back(mainTextButt);
+
+	// spriteButts [0]
+	SpriteButton mainResetButt = SpriteButton(m_resetIcon, { 0.55f, 0.55f }, { 25, 25 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255));
+	mainResetButt.setSpriteColor(sf::Color::Color(0, 0, 0, 160));
+	mainResetButt.setPosition({ 140, 400 });
+	m_spriteButts.push_back(mainResetButt);
+
+	// spriteButts [1]
+	SpriteButton mainPlayButt = SpriteButton(m_playIcon, { 0.6f, 0.6f }, { 25, 25 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255));
+	mainPlayButt.setSpriteColor(sf::Color::Color(0, 0, 0, 160));
+	mainPlayButt.setPosition({ 180, 400 });
+	m_spriteButts.push_back(mainPlayButt);
+
+	// spriteButts [2]
+	SpriteButton mainPauseButt = SpriteButton(m_stopIcon, { 0.6f, 0.6f }, { 25, 25 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255));
+	mainPauseButt.setSpriteColor(sf::Color::Color(0, 0, 0, 160));
+	mainPauseButt.setPosition({ 220, 400 });
+	m_spriteButts.push_back(mainPauseButt);
+
+	// spriteButts [3]
+	SpriteButton mainSettingsButton = SpriteButton(m_settIcon, { 0.75, 0.75 }, { 25, 25 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255));
+	mainSettingsButton.setSpriteColor(sf::Color::Color(0, 0, 0, 160));
+	mainSettingsButton.setPosition({ 750, 400 });
+	m_spriteButts.push_back(mainSettingsButton);
+
+	// dynamicTexts [0]
+	sf::Text mainWPMNum;
+	mainWPMNum.setFont(arialbd);
+	mainWPMNum.setCharacterSize(20);
+	mainWPMNum.setFillColor(sf::Color::Color(0, 0, 0, 200));
+	mainWPMNum.setPosition({ 575, 400 });
+	mainWPMNum.setString(std::to_string(m_settings.getWPM()));
+	m_dynamicTexts.push_back(mainWPMNum);
+
+	// staticTexts [0]
+	sf::Text mainWPM;
+	mainWPM.setFont(arialbd);
+	mainWPM.setCharacterSize(20);
+	mainWPM.setFillColor(sf::Color::Color(0, 0, 0, 160));
+	mainWPM.setPosition({ 613, 400 });
+	mainWPM.setString("WPM");
+	m_staticTexts.push_back(mainWPM);
+
+	// dynamicTexts [1]
+	sf::Text mainWPFNum;
+	mainWPFNum.setFont(arialbd);
+	mainWPFNum.setCharacterSize(20);
+	mainWPFNum.setFillColor(sf::Color::Color(0, 0, 0, 200));
+	mainWPFNum.setPosition({ 675, 400 });
+	mainWPFNum.setString(std::to_string(m_settings.getWPF()));
+	m_dynamicTexts.push_back(mainWPFNum);
+
+	// staticTexts [1]
+	sf::Text mainWPF;
+	mainWPF.setFont(arialbd);
+	mainWPF.setCharacterSize(20);
+	mainWPF.setFillColor(sf::Color::Color(0, 0, 0, 160));
+	mainWPF.setPosition({ 690, 400 });
+	mainWPF.setString("WPF");
+	m_staticTexts.push_back(mainWPF);
+
+	// LOAD PAGE
+	// --------------------------------------------------------------
+	// textButts [1]
+	TextButton loadClearButt = TextButton("CLEAR", { 100,25 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255), sf::Color::Color(0, 0, 0, 160));
+	loadClearButt.setFont(arialbd);
+	loadClearButt.setPosition({ 25,400 });
+	m_textButts.push_back(loadClearButt);
+
+	// textButts [2]
+	TextButton loadLoadButt = TextButton("LOAD", { 100,25 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255), sf::Color::Color(0, 0, 0, 160));
+	loadLoadButt.setFont(arialbd);
+	loadLoadButt.setPosition({ 140,400 });
+	m_textButts.push_back(loadLoadButt);
+
+	// textButts [3]
+	TextButton loadSaveButt = TextButton("SAVE", { 100,25 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255), sf::Color::Color(0, 0, 0, 160));
+	loadSaveButt.setFont(arialbd);
+	loadSaveButt.setPosition({ 255,400 });
+	m_textButts.push_back(loadSaveButt);
+
+	// spriteButts [4]
+	SpriteButton returnButt = SpriteButton(m_backIcon, { 0.9f, 0.9f }, { 25, 25 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255));
+	returnButt.setSpriteColor(sf::Color::Color(0, 0, 0, 160));
+	returnButt.setPosition({ 750, 400 });
+	m_spriteButts.push_back(returnButt);
 }

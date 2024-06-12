@@ -7,6 +7,8 @@
 #include "Button.h"
 #include "SpriteButton.h"
 #include "TextButton.h"
+#include "TextBox.h"
+#include <FileExplorer.h>
 
 class SpeedReader {
 
@@ -36,7 +38,22 @@ private:
 
 	TextDisplay m_display;
 
+	TextBox m_inputBox;
+
 	std::wstring m_text;
+
+	sf::RectangleShape m_mainFrame;
+
+	std::vector<TextButton> m_textButts;
+	std::vector<SpriteButton> m_spriteButts;
+
+	std::vector<sf::Text> m_staticTexts;
+	std::vector<sf::Text> m_dynamicTexts;
+
+	sf::Color m_lightBgColor;
+	sf::Color m_lightOutColor;
+	sf::Color m_lightTextColor;
+	sf::Color m_lightMainColor;
 
 	sf::Font arial;
 	sf::Font arialbd;
@@ -44,6 +61,14 @@ private:
 	sf::Font timesbd;
 	sf::Font comic;
 	sf::Font comicbd;
+
+	sf::Texture m_resetIcon;
+	sf::Texture m_playIcon;
+	sf::Texture m_stopIcon;
+	sf::Texture m_backIcon;
+	sf::Texture m_settIcon;
+
+	sf::Image m_appIcon;
 
 	void handleButton(Button& button);
 

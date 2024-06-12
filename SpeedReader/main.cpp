@@ -13,6 +13,7 @@ int main() {
 
 	SpeedReader SR;
 	SR.loadResources();
+	SR.initialize();
 	SR.loop();
 
 	return 0;
