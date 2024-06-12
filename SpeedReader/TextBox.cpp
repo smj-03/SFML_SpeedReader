@@ -1,7 +1,7 @@
 ﻿#include "TextBox.h"
 #include <iostream>
 
-TextBox::TextBox() {}
+TextBox::TextBox() : m_limit(300) {}
 
 TextBox::TextBox(int size, sf::Color color, bool selected) {
 

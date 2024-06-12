@@ -53,7 +53,6 @@ private:
 	sf::Color m_lightBgColor;
 	sf::Color m_lightOutColor;
 	sf::Color m_lightTextColor;
-	sf::Color m_lightMainColor;
 
 	sf::Font arial;
 	sf::Font arialbd;
@@ -70,10 +69,10 @@ private:
 
 	sf::Image m_appIcon;
 
-	void handleButton(Button& button);
+	void highlightButton(Button& button);
 
-	void handleButton(TextButton& button);
+	void highlightButton(TextButton& button);
 
-	void handleButton(SpriteButton& button);
+	void highlightButton(SpriteButton& button);
 
 };

@@ -9,110 +9,6 @@ SpeedReader::SpeedReader() {
 
 void SpeedReader::loop() {
 
-	// SETTINGS 
-
-	sf::Text sWPM;
-	sWPM.setFont(arialbd);
-	sWPM.setCharacterSize(25);
-	sWPM.setFillColor(sf::Color::Color(0, 0, 0, 200));
-	sWPM.setPosition({ 75, 75 });
-	sWPM.setString("WORDS PER MINUTE:");
-
-	sf::Text sWPMNum;
-	sWPMNum.setFont(arialbd);
-	sWPMNum.setCharacterSize(25);
-	sWPMNum.setFillColor(sf::Color::Color(0, 0, 0, 200));
-	sWPMNum.setPosition({ 350, 75 });
-	sWPMNum.setString("500");
-
-	Button tempButt1({ 25, 12 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255));
-	tempButt1.setPosition({ 400 , 78 });
-
-	Button tempButt2({ 25, 12 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255));
-	tempButt2.setPosition({ 400 , 91 });
-
-	// CHUNKS
-
-	sf::Text sChunks;
-	sChunks.setFont(arialbd);
-	sChunks.setCharacterSize(25);
-	sChunks.setFillColor(sf::Color::Color(0, 0, 0, 200));
-	sChunks.setPosition({ 75, 125 });
-	sChunks.setString("CHUNKS:");
-
-	sf::Text sChunksNum;
-	sChunksNum.setFont(arialbd);
-	sChunksNum.setCharacterSize(25);
-	sChunksNum.setFillColor(sf::Color::Color(0, 0, 0, 200));
-	sChunksNum.setPosition({ 200, 125 });
-	sChunksNum.setString("2");
-
-	Button tempButt3({ 25, 12 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255));
-	tempButt3.setPosition({ 225, 128 });
-
-	Button tempButt4({ 25, 12 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255));
-	tempButt4.setPosition({ 225, 141 });
-
-	// CHAR SIZE
-
-	sf::Text sCharSize;
-	sCharSize.setFont(arialbd);
-	sCharSize.setCharacterSize(25);
-	sCharSize.setFillColor(sf::Color::Color(0, 0, 0, 200));
-	sCharSize.setPosition({ 75, 200 });
-	sCharSize.setString("CHARACTER SIZE:");
-
-	sf::Text sCharSizeNum;
-	sCharSizeNum.setFont(arialbd);
-	sCharSizeNum.setCharacterSize(25);
-	sCharSizeNum.setFillColor(sf::Color::Color(0, 0, 0, 200));
-	sCharSizeNum.setPosition({ 310, 200 });
-	sCharSizeNum.setString("24");
-
-	Button tempButt5({ 25, 12 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255));
-	tempButt5.setPosition({ 350, 203 });
-
-	Button tempButt6({ 25, 12 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255));
-	tempButt6.setPosition({ 350, 216 });
-
-	// FONT
-
-	sf::Text sFont;
-	sFont.setFont(arialbd);
-	sFont.setCharacterSize(25);
-	sFont.setFillColor(sf::Color::Color(0, 0, 0, 200));
-	sFont.setPosition({ 75, 250 });
-	sFont.setString("FONT:");
-
-	TextButton sArial("Arial", { 100, 25 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255), sf::Color::Color(0, 0, 0, 200));
-	sArial.setFont(arialbd);
-	sArial.setPosition({ 170, 254 });
-
-	TextButton sTimes("Times New Roman", { 200, 25 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255), sf::Color::Color(0, 0, 0, 200));
-	sTimes.setFont(timesbd);
-	sTimes.setPosition({ 290, 254 });
-
-	TextButton sComic("Comic Sans MS", { 200, 25 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255), sf::Color::Color(0, 0, 0, 200));
-	sComic.setFont(comicbd);
-	sComic.setPosition({ 510, 254 });
-
-
-	// MODE
-	sf::Text sMode;
-	sMode.setFont(arialbd);
-	sMode.setCharacterSize(25);
-	sMode.setFillColor(sf::Color::Color(0, 0, 0, 200));
-	sMode.setPosition({ 75, 325 });
-	sMode.setString("MODE:");
-
-	TextButton sLight("LIGHT", { 100, 25 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255), sf::Color::Color(0, 0, 0, 200));
-	sLight.setFont(arialbd);
-	sLight.setPosition({ 180, 329 });
-
-	TextButton sDark("DARK", { 100, 25 }, sf::Color::Color(0, 0, 0, 215), sf::Color::Color(0, 0, 0, 240), sf::Color::Color(255, 255, 255, 230));
-	sDark.setFont(arialbd);
-	sDark.setPosition({ 290, 329 });
-
 	FileExplorer FE;
 
 	sf::Event event;
@@ -239,11 +135,11 @@ void SpeedReader::loop() {
 
 			if (event.type == sf::Event::MouseMoved) {
 
-				handleButton(m_textButts[0]);
-				handleButton(m_spriteButts[0]);
-				handleButton(m_spriteButts[1]);
-				handleButton(m_spriteButts[2]);
-				handleButton(m_spriteButts[3]);
+				highlightButton(m_textButts[0]);
+				highlightButton(m_spriteButts[0]);
+				highlightButton(m_spriteButts[1]);
+				highlightButton(m_spriteButts[2]);
+				highlightButton(m_spriteButts[3]);
 
 			}
 
@@ -278,7 +174,6 @@ void SpeedReader::loop() {
 		case LoadText:
 
 			m_window.draw(m_mainFrame);
-
 			m_inputBox.draw(m_window);
 
 			m_textButts[1].draw(m_window);
@@ -289,9 +184,9 @@ void SpeedReader::loop() {
 
 			if (event.type == sf::Event::MouseMoved) {
 
-				handleButton(m_textButts[1]);
-				handleButton(m_textButts[2]);
-				handleButton(m_textButts[3]);
+				highlightButton(m_textButts[1]);
+				highlightButton(m_textButts[2]);
+				highlightButton(m_textButts[3]);
 
 			}
 
@@ -342,64 +237,48 @@ void SpeedReader::loop() {
 
 			break;
 		case SettingsMenu:
-
-			tempButt1.draw(m_window);
-			tempButt2.draw(m_window);
-			tempButt3.draw(m_window);
-			tempButt4.draw(m_window);
-			tempButt5.draw(m_window);
-			tempButt6.draw(m_window);
-
-			sArial.draw(m_window);
-			sTimes.draw(m_window);
-			sComic.draw(m_window);
-
-			sLight.draw(m_window);
-			sDark.draw(m_window);
-
-			m_window.draw(sWPMNum);
-			m_window.draw(sWPM);
-
-			m_window.draw(sChunks);
-			m_window.draw(sChunksNum);
-
-			m_window.draw(sCharSize);
-			m_window.draw(sCharSizeNum);
-			m_window.draw(sFont);
-			m_window.draw(sMode);
+			m_textButts[4].draw(m_window);
+			m_textButts[5].draw(m_window);
+			m_textButts[6].draw(m_window);
+			m_textButts[7].draw(m_window);
+			m_textButts[8].draw(m_window);
 
 			m_spriteButts[4].draw(m_window);
+			m_spriteButts[5].draw(m_window);
+			m_spriteButts[6].draw(m_window);
+			m_spriteButts[7].draw(m_window);
+			m_spriteButts[8].draw(m_window);
+
+			m_window.draw(m_staticTexts[2]);
+			m_window.draw(m_staticTexts[3]);
+			m_window.draw(m_staticTexts[4]);
+			m_window.draw(m_staticTexts[5]);
+			m_window.draw(m_staticTexts[6]);
+		
+
 
 			if (event.type == sf::Event::MouseMoved) {
 
-				handleButton(tempButt1);
-				handleButton(tempButt2);
-				handleButton(tempButt3);
-				handleButton(tempButt4);
-				handleButton(tempButt5);
-				handleButton(tempButt6);
-				handleButton(sArial);
-				handleButton(sTimes);
-				handleButton(sComic);
-				handleButton(m_spriteButts[4]);
-				//handleButton(sDark);
-				handleButton(sLight);
+				highlightButton(m_spriteButts[4]);
+				highlightButton(m_textButts[6]);
+				highlightButton(m_textButts[7]);
+				highlightButton(m_textButts[8]);
 
 			}
 
-			if (sArial.isClicked(m_window)) {
+			if (m_textButts[6].isClicked(m_window)) {
 				m_display.setFont(arial);
 				m_display.centerText();
 				m_programState = MainDisplay;
 			}
 
-			if (sTimes.isClicked(m_window)) {
+			if (m_textButts[7].isClicked(m_window)) {
 				m_display.setFont(times);
 				m_display.centerText();
 				m_programState = MainDisplay;
 			}
 
-			if (sComic.isClicked(m_window)) {
+			if (m_textButts[8].isClicked(m_window)) {
 				m_display.setFont(comic);
 				m_display.centerText();
 				m_programState = MainDisplay;
@@ -413,34 +292,34 @@ void SpeedReader::loop() {
 	}
 }
 
-void SpeedReader::handleButton(Button& button) {
+void SpeedReader::highlightButton(Button& button) {
 	if (button.isMouseOver(m_window)) {
 		button.setBackColor(sf::Color::Color(240, 241, 242, 255));
 	}
 	else {
-		button.setBackColor(sf::Color::Color(248, 249, 250, 255));
+		button.setBackColor(m_lightBgColor);
 	}
 }
 
-void SpeedReader::handleButton(TextButton& button) {
+void SpeedReader::highlightButton(TextButton& button) {
 	if (button.isMouseOver(m_window)) {
 		button.setBackColor(sf::Color::Color(240, 241, 242, 255));
 		button.setTextColor(sf::Color::Color(0, 0, 0, 180));
 	}
 	else {
-		button.setBackColor(sf::Color::Color(248, 249, 250, 255));
-		button.setTextColor(sf::Color::Color(0, 0, 0, 160));
+		button.setBackColor(m_lightBgColor);
+		button.setTextColor(m_lightTextColor);
 	}
 }
 
-void SpeedReader::handleButton(SpriteButton& button) {
+void SpeedReader::highlightButton(SpriteButton& button) {
 	if (button.isMouseOver(m_window)) {
 		button.setBackColor(sf::Color::Color(240, 241, 242, 255));
 		button.setSpriteColor(sf::Color::Color(0, 0, 0, 180));
 	}
 	else {
-		button.setBackColor(sf::Color::Color(248, 249, 250, 255));
-		button.setSpriteColor(sf::Color::Color(0, 0, 0, 160));
+		button.setBackColor(m_lightBgColor);
+		button.setSpriteColor(m_lightTextColor);
 	}
 }
 
@@ -473,6 +352,7 @@ void SpeedReader::initialize() {
 
 	m_lightBgColor = sf::Color::Color(248, 249, 250, 255);
 	m_lightOutColor = sf::Color::Color(222, 226, 230, 255);
+	m_lightTextColor = sf::Color::Color(0, 0, 0, 160);
 
 	m_display.setFont(arial);
 	m_display.setWord("Welcome to Speed Reader!");
@@ -490,32 +370,32 @@ void SpeedReader::initialize() {
 	// MAIN PAGE
 	// --------------------------------------------------------------
 	// textButts [0]
-	TextButton mainTextButt = TextButton("TEXT", { 100,25 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255), sf::Color::Color(0, 0, 0, 160));
+	TextButton mainTextButt = TextButton("TEXT", { 100,25 }, m_lightBgColor, sf::Color::Color(222, 226, 230, 255), m_lightTextColor);
 	mainTextButt.setFont(arialbd);
 	mainTextButt.setPosition({ 25,400 });
 	m_textButts.push_back(mainTextButt);
 
 	// spriteButts [0]
-	SpriteButton mainResetButt = SpriteButton(m_resetIcon, { 0.55f, 0.55f }, { 25, 25 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255));
-	mainResetButt.setSpriteColor(sf::Color::Color(0, 0, 0, 160));
+	SpriteButton mainResetButt = SpriteButton(m_resetIcon, { 0.55f, 0.55f }, { 25, 25 }, m_lightBgColor, m_lightOutColor);
+	mainResetButt.setSpriteColor(m_lightTextColor);
 	mainResetButt.setPosition({ 140, 400 });
 	m_spriteButts.push_back(mainResetButt);
 
 	// spriteButts [1]
-	SpriteButton mainPlayButt = SpriteButton(m_playIcon, { 0.6f, 0.6f }, { 25, 25 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255));
-	mainPlayButt.setSpriteColor(sf::Color::Color(0, 0, 0, 160));
+	SpriteButton mainPlayButt = SpriteButton(m_playIcon, { 0.6f, 0.6f }, { 25, 25 }, m_lightBgColor, m_lightOutColor);
+	mainPlayButt.setSpriteColor(m_lightTextColor);
 	mainPlayButt.setPosition({ 180, 400 });
 	m_spriteButts.push_back(mainPlayButt);
 
 	// spriteButts [2]
-	SpriteButton mainPauseButt = SpriteButton(m_stopIcon, { 0.6f, 0.6f }, { 25, 25 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255));
-	mainPauseButt.setSpriteColor(sf::Color::Color(0, 0, 0, 160));
+	SpriteButton mainPauseButt = SpriteButton(m_stopIcon, { 0.6f, 0.6f }, { 25, 25 }, m_lightBgColor, m_lightOutColor);
+	mainPauseButt.setSpriteColor(m_lightTextColor);
 	mainPauseButt.setPosition({ 220, 400 });
 	m_spriteButts.push_back(mainPauseButt);
 
 	// spriteButts [3]
-	SpriteButton mainSettingsButton = SpriteButton(m_settIcon, { 0.75, 0.75 }, { 25, 25 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255));
-	mainSettingsButton.setSpriteColor(sf::Color::Color(0, 0, 0, 160));
+	SpriteButton mainSettingsButton = SpriteButton(m_settIcon, { 0.75, 0.75 }, { 25, 25 }, m_lightBgColor, m_lightOutColor);
+	mainSettingsButton.setSpriteColor(m_lightTextColor);
 	mainSettingsButton.setPosition({ 750, 400 });
 	m_spriteButts.push_back(mainSettingsButton);
 
@@ -532,7 +412,7 @@ void SpeedReader::initialize() {
 	sf::Text mainWPM;
 	mainWPM.setFont(arialbd);
 	mainWPM.setCharacterSize(20);
-	mainWPM.setFillColor(sf::Color::Color(0, 0, 0, 160));
+	mainWPM.setFillColor(m_lightTextColor);
 	mainWPM.setPosition({ 613, 400 });
 	mainWPM.setString("WPM");
 	m_staticTexts.push_back(mainWPM);
@@ -550,7 +430,7 @@ void SpeedReader::initialize() {
 	sf::Text mainWPF;
 	mainWPF.setFont(arialbd);
 	mainWPF.setCharacterSize(20);
-	mainWPF.setFillColor(sf::Color::Color(0, 0, 0, 160));
+	mainWPF.setFillColor(m_lightTextColor);
 	mainWPF.setPosition({ 690, 400 });
 	mainWPF.setString("WPF");
 	m_staticTexts.push_back(mainWPF);
@@ -558,26 +438,129 @@ void SpeedReader::initialize() {
 	// LOAD PAGE
 	// --------------------------------------------------------------
 	// textButts [1]
-	TextButton loadClearButt = TextButton("CLEAR", { 100,25 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255), sf::Color::Color(0, 0, 0, 160));
+	TextButton loadClearButt = TextButton("CLEAR", { 100,25 }, m_lightBgColor, m_lightOutColor, m_lightTextColor);
 	loadClearButt.setFont(arialbd);
 	loadClearButt.setPosition({ 25,400 });
 	m_textButts.push_back(loadClearButt);
 
 	// textButts [2]
-	TextButton loadLoadButt = TextButton("LOAD", { 100,25 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255), sf::Color::Color(0, 0, 0, 160));
+	TextButton loadLoadButt = TextButton("LOAD", { 100,25 }, m_lightBgColor, m_lightOutColor, m_lightTextColor);
 	loadLoadButt.setFont(arialbd);
 	loadLoadButt.setPosition({ 140,400 });
 	m_textButts.push_back(loadLoadButt);
 
 	// textButts [3]
-	TextButton loadSaveButt = TextButton("SAVE", { 100,25 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255), sf::Color::Color(0, 0, 0, 160));
+	TextButton loadSaveButt = TextButton("SAVE", { 100,25 }, m_lightBgColor, m_lightOutColor, m_lightTextColor);
 	loadSaveButt.setFont(arialbd);
 	loadSaveButt.setPosition({ 255,400 });
 	m_textButts.push_back(loadSaveButt);
 
 	// spriteButts [4]
-	SpriteButton returnButt = SpriteButton(m_backIcon, { 0.9f, 0.9f }, { 25, 25 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255));
-	returnButt.setSpriteColor(sf::Color::Color(0, 0, 0, 160));
+	SpriteButton returnButt = SpriteButton(m_backIcon, { 0.9f, 0.9f }, { 25, 25 }, m_lightBgColor, m_lightOutColor);
+	returnButt.setSpriteColor(m_lightTextColor);
 	returnButt.setPosition({ 750, 400 });
 	m_spriteButts.push_back(returnButt);
+
+	// SETTINGS
+	// --------------------------------------------------------------
+	// statTexts [2]
+	sf::Text settingsWPM;
+	settingsWPM.setFont(arialbd);
+	settingsWPM.setCharacterSize(25);
+	settingsWPM.setFillColor(sf::Color::Color(0, 0, 0, 200));
+	settingsWPM.setPosition({ 75, 75 });
+	settingsWPM.setString("WORDS PER MINUTE");
+	m_staticTexts.push_back(settingsWPM);
+
+	// spriteButt [5]
+	SpriteButton settingsUp(m_playIcon, { 0.6f, 0.6f }, { 25, 25 }, m_lightBgColor, m_lightOutColor);
+	settingsUp.setRotation(-90.f);
+	settingsUp.setSpriteColor(m_lightTextColor);
+	settingsUp.setPosition({ 340, 79 });
+	m_spriteButts.push_back(settingsUp);
+
+	// spriteButt [6]
+	SpriteButton settingsDown(m_playIcon, { 0.6f, 0.6f }, { 25, 25 }, m_lightBgColor, m_lightOutColor);
+	settingsDown.setRotation(90.f);
+	settingsDown.setSpriteColor(m_lightTextColor);
+	settingsDown.setPosition({ 370, 79 });
+	m_spriteButts.push_back(settingsDown);
+
+	// statTexts [3]
+	sf::Text settingsWPF;
+	settingsWPF.setFont(arialbd);
+	settingsWPF.setCharacterSize(25);
+	settingsWPF.setFillColor(sf::Color::Color(0, 0, 0, 200));
+	settingsWPF.setPosition({ 75, 125 });
+	settingsWPF.setString("WORDS PER FRAME");
+	m_staticTexts.push_back(settingsWPF);
+
+	// spriteButt [7]
+	SpriteButton settingsLeft(m_playIcon, { -0.6f, 0.6f }, { 25, 25 }, m_lightBgColor, m_lightOutColor);
+	settingsLeft.setSpriteColor(m_lightTextColor);
+	settingsLeft.setPosition({ 334, 129 });
+	m_spriteButts.push_back(settingsLeft);
+
+	// spriteButt [8]
+	SpriteButton settingsRight(m_playIcon, { 0.6f, 0.6f }, { 25, 25 }, m_lightBgColor, m_lightOutColor);
+	settingsRight.setSpriteColor(m_lightTextColor);
+	settingsRight.setPosition({ 364, 129 });
+	m_spriteButts.push_back(settingsRight);
+
+	// statTexts [4]
+	sf::Text settingsCharSize;
+	settingsCharSize.setFont(arialbd);
+	settingsCharSize.setCharacterSize(25);
+	settingsCharSize.setFillColor(sf::Color::Color(0, 0, 0, 200));
+	settingsCharSize.setPosition({ 75, 200 });
+	settingsCharSize.setString("CHARACTER SIZE");
+	m_staticTexts.push_back(settingsCharSize);
+
+	// textButts [4]
+	TextButton settingsLBracket("[", { 25, 25 }, m_lightBgColor, m_lightOutColor, m_lightTextColor);
+	settingsLBracket.setFont(arialbd);
+	settingsLBracket.setPosition({ 304, 204 });
+	m_textButts.push_back(settingsLBracket);
+
+	// textButts [5]
+	TextButton settingsRBracket("]", { 25, 25 }, m_lightBgColor, m_lightOutColor, m_lightTextColor);
+	settingsRBracket.setFont(arialbd);
+	settingsRBracket.setPosition({ 334, 204 });
+	m_textButts.push_back(settingsRBracket);
+
+	// statTexts [5]
+	sf::Text settingsFont;
+	settingsFont.setFont(arialbd);
+	settingsFont.setCharacterSize(25);
+	settingsFont.setFillColor(sf::Color::Color(0, 0, 0, 200));
+	settingsFont.setPosition({ 75, 250 });
+	settingsFont.setString("FONT");
+	m_staticTexts.push_back(settingsFont);
+
+	// textButts [6]
+	TextButton sArial("Arial", { 80, 25 }, m_lightBgColor, m_lightOutColor, sf::Color::Color(0, 0, 0, 200));
+	sArial.setFont(arialbd);
+	sArial.setPosition({ 154, 254 });
+	m_textButts.push_back(sArial);
+
+	// textButts [6]
+	TextButton sTimes("Times New Roman", { 200, 25 }, m_lightBgColor, m_lightOutColor, sf::Color::Color(0, 0, 0, 200));
+	sTimes.setFont(timesbd);
+	sTimes.setPosition({ 249, 254 });
+	m_textButts.push_back(sTimes);
+
+	// textButts [8]
+	TextButton sComic("Comic Sans MS", { 200, 25 }, m_lightBgColor, m_lightOutColor, sf::Color::Color(0, 0, 0, 200));
+	sComic.setFont(comicbd);
+	sComic.setPosition({ 464, 254 });
+	m_textButts.push_back(sComic);
+
+	// statText [6]
+	sf::Text credits;
+	credits.setFont(arialbd);
+	credits.setCharacterSize(25);
+	credits.setFillColor(sf::Color::Color(0, 0, 0, 140));
+	credits.setPosition({ 75, 325 });
+	credits.setString("BY SMJ03");
+	m_staticTexts.push_back(credits);
 }

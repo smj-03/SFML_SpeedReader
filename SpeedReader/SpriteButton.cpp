@@ -7,7 +7,6 @@ SpriteButton::SpriteButton(sf::Texture& texture, sf::Vector2f spriteScale, sf::V
 	texture.setSmooth(true);
 	m_sprite.setTexture(texture);
 	m_sprite.setScale(spriteScale);
-
 }
 
 void SpriteButton::setTexture(sf::Texture& texture) {
@@ -26,6 +25,10 @@ void SpriteButton::setPosition(sf::Vector2f pos) {
 
 void SpriteButton::setScale(sf::Vector2f scale) {
 	m_sprite.setScale(scale);
+}
+
+void SpriteButton::setRotation(float angle) {
+	m_sprite.setRotation(angle);
 }
 
 void SpriteButton::setSpriteColor(sf::Color color) {

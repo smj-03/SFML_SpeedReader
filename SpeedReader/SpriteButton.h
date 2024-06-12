@@ -16,6 +16,8 @@ public:
 	
 	void setScale(sf::Vector2f scale);
 
+	void setRotation(float angle);
+
 	void setSpriteColor(sf::Color color);
 
 	void moveSprite(sf::Vector2f coords);

@@ -1,5 +1,11 @@
 ﻿  Scanning sources for module dependencies...
   SpeedReader.cpp
+  main.cpp
+P:\project\SpeedReader\SpeedReader\main.cpp(6,1): warning C4005: '_WIN32_WINNT': macro redefinition
+  D:\Windows Kits\10\Include\10.0.22621.0\shared\sdkddkver.h(224,1):
+  see previous definition of '_WIN32_WINNT'
+  
+  Generating Code...
   SpeedReader.vcxproj -> P:\project\SpeedReader\x64\Debug\SpeedReader.exe
   P:\project\SpeedReader\x64\Debug\SpeedReader.exe
           1 file(s) copied.
