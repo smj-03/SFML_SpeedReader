@@ -13,10 +13,6 @@ public:
 
 	Settings();
 
-	void loadSettings();
-
-	void saveSettings();
-
 	void incrementDisplayCharSize();
 
 	void decrementDisplayCharSize();

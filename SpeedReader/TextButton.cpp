@@ -1,5 +1,4 @@
 #include "TextButton.h"
-#include <iostream>
 
 TextButton::TextButton() {};
 

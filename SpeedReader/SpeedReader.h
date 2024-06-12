@@ -35,6 +35,8 @@ private:
 
 	sf::Clock m_timer;
 
+	sf::Clock m_buttDelay;
+
 	TextSplitter m_splitter;
 
 	TextDisplay m_display;

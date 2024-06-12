@@ -30,9 +30,10 @@ bool Button::isMouseOver(sf::RenderWindow& window) {
 	return buttonBounds.contains(static_cast<sf::Vector2f>(mousePos));
 }
 
-bool Button::isClicked(sf::RenderWindow & window) {
-	if (isMouseOver(window)) {
+bool Button::isClicked(sf::RenderWindow & window, sf::Clock& clock) {
+	if (isMouseOver(window) && clock.getElapsedTime().asMilliseconds() > 500) {
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && !m_wasClicked) {
+			clock.restart();
 			m_wasClicked = true;
 			return true;
 		}

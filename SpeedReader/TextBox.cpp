@@ -1,5 +1,4 @@
 ﻿#include "TextBox.h"
-#include <iostream>
 
 TextBox::TextBox() : m_limit(300) {}
 
@@ -49,7 +48,6 @@ std::wstring TextBox::getText() {
 }
 
 void TextBox::typedOn(sf::Uint16 charTyped) {
-	std::cout << charTyped << std::endl;
 	if (m_isSelected) {
 		if (charTyped < 128 || charTyped > 210) {
 			if (m_hasLimit) {

@@ -1,15 +1,16 @@
 #pragma once
 #include "API.h"
 #include <windows.h>
-#include <commdlg.h>   // For GetOpenFileName
-#include <fstream>     // For std::ifstream
-#include <sstream>     // For std::stringstream
-#include <iostream>    // For std::cout
-#include <tchar.h>     // For _T and TCHAR macros
-#include <locale.h>    // For Polish signs
+#include <commdlg.h>
+#include <fstream>  
+#include <sstream>     
+#include <iostream>    
+#include <tchar.h>  
+#include <locale.h>  
 #include <ctime>
 #include <chrono>
 #include <exception>
+#include <direct.h>
 
 class EXPORT_API FileExplorer {
 

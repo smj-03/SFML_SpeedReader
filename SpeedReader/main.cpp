@@ -8,8 +8,8 @@
 
 int main() {
 
-	//HWND hWnd = GetConsoleWindow();
-	//ShowWindow(hWnd, SW_HIDE);
+	HWND hWnd = GetConsoleWindow();
+	ShowWindow(hWnd, SW_HIDE);
 
 	SpeedReader SR;
 	SR.loadResources();

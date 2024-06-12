@@ -48,11 +48,17 @@ void FileExplorer::SaveFileContent(const std::wstring& content) {
     std::tm timeinfo;
     localtime_s(&timeinfo, &time);
     char buffer[80];
-    std::strftime(buffer, sizeof(buffer), ".\\texts\\output_%Y-%m-%d_%H:%M.txt", &timeinfo);
+    std::strftime(buffer, sizeof(buffer), ".\\texts\\output_%Y-%m-%d_%H-%M-%S.txt", &timeinfo);
+
+    // Ensure the directory exists
+    if (_mkdir(".\\texts") != 0 && errno != EEXIST) {
+        std::wcerr << L"Could not create directory: .\\texts" << std::endl;
+        return;
+    }
 
     std::wofstream file(buffer);
     if (!file.is_open()) {
-        std::wcerr << _T("Could not create or open file: ") << buffer << std::endl;
+        std::wcerr << L"Could not create or open file: " << buffer << std::endl;
         return;
     }
 
@@ -60,5 +66,5 @@ void FileExplorer::SaveFileContent(const std::wstring& content) {
     file << content;
     file.close();
 
-    std::wcout << _T("Content saved to file: ") << buffer << std::endl;
+    std::wcout << L"Content saved to file: " << buffer << std::endl;
 }

@@ -1,6 +1,4 @@
 ﻿#include "SpeedReader.h"
-#include <iostream>
-
 
 SpeedReader::SpeedReader() {
 	m_window.create(sf::VideoMode(800, 450), "Speed Reader", sf::Style::Titlebar | sf::Style::Close);
@@ -27,6 +25,8 @@ void SpeedReader::loop() {
 			}
 
 			if (event.type == sf::Event::KeyPressed) {
+
+
 
 				if (event.key.code == sf::Keyboard::Escape) {
 					if (m_programState == MainDisplay) {
@@ -108,9 +108,10 @@ void SpeedReader::loop() {
 						}
 					}
 				}
+
 			}
 		}
-		// Add settings for dark mode
+
 		m_window.clear(sf::Color::White);
 
 		switch (m_programState) {
@@ -143,12 +144,12 @@ void SpeedReader::loop() {
 
 			}
 
-			if (m_textButts[0].isClicked(m_window)) {
+			if (m_textButts[0].isClicked(m_window, m_buttDelay)) {
 				m_display.pause(m_timer);
 				m_programState = LoadText;
 			}
 
-			if (m_spriteButts[0].isClicked(m_window)) {
+			if (m_spriteButts[0].isClicked(m_window, m_buttDelay)) {
 				if (m_display.isLoaded()) {
 					m_display.resetIndex();
 					m_window.draw(m_display.getWord());
@@ -156,15 +157,15 @@ void SpeedReader::loop() {
 				}
 			}
 
-			if (m_spriteButts[1].isClicked(m_window)) {
+			if (m_spriteButts[1].isClicked(m_window, m_buttDelay)) {
 				m_display.unpause(m_timer);
 			}
 
-			if (m_spriteButts[2].isClicked(m_window)) {
+			if (m_spriteButts[2].isClicked(m_window, m_buttDelay)) {
 				m_display.pause(m_timer);
 			}
 
-			if (m_spriteButts[3].isClicked(m_window)) {
+			if (m_spriteButts[3].isClicked(m_window, m_buttDelay)) {
 				m_programState = SettingsMenu;
 				m_display.pause(m_timer);
 			}
@@ -190,11 +191,11 @@ void SpeedReader::loop() {
 
 			}
 
-			if (m_textButts[1].isClicked(m_window)) {
+			if (m_textButts[1].isClicked(m_window, m_buttDelay)) {
 				m_inputBox.clearText();
 			}
 
-			if (m_textButts[2].isClicked(m_window)) {
+			if (m_textButts[2].isClicked(m_window, m_buttDelay)) {
 				std::wstring filePath = FE.OpenTextFileDialog();
 				if (filePath.empty()) {
 					std::wcerr << L"No file selected." << std::endl;
@@ -212,16 +213,16 @@ void SpeedReader::loop() {
 				m_programState = ProgramState::MainDisplay;
 			}
 
-			if (m_textButts[3].isClicked(m_window)) {
+			if (m_textButts[3].isClicked(m_window, m_buttDelay)) {
 				auto newText = m_inputBox.getText();
 				bool containsLetter = std::any_of(newText.begin(), newText.end(), [](wchar_t c) {
 					return std::isalpha(c);
 					});
-				if(!newText.empty() && containsLetter)
+				if (!newText.empty() && containsLetter)
 					FE.SaveFileContent(newText);
 			}
 
-			if (m_spriteButts[4].isClicked(m_window)) {
+			if (m_spriteButts[4].isClicked(m_window, m_buttDelay)) {
 				m_programState = ProgramState::MainDisplay;
 			}
 
@@ -276,19 +277,23 @@ void SpeedReader::loop() {
 
 			}
 
-			if (m_textButts[6].isClicked(m_window)) {
+			if (m_spriteButts[4].isClicked(m_window, m_buttDelay)) {
+				m_programState = ProgramState::MainDisplay;
+			}
+
+			if (m_textButts[6].isClicked(m_window, m_buttDelay)) {
 				m_display.setFont(arial);
 				m_display.centerText();
 				m_programState = MainDisplay;
 			}
 
-			if (m_textButts[7].isClicked(m_window)) {
+			if (m_textButts[7].isClicked(m_window, m_buttDelay)) {
 				m_display.setFont(times);
 				m_display.centerText();
 				m_programState = MainDisplay;
 			}
 
-			if (m_textButts[8].isClicked(m_window)) {
+			if (m_textButts[8].isClicked(m_window, m_buttDelay)) {
 				m_display.setFont(comic);
 				m_display.centerText();
 				m_programState = MainDisplay;
