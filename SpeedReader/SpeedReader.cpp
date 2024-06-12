@@ -10,14 +10,15 @@ SpeedReader::SpeedReader() {
 	sf::Image icon;
 	icon.loadFromFile("icons/logo.png");
 	m_window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
+
 }
 
 void SpeedReader::initialize() {}
 
 void SpeedReader::loop() {
 
-	sf::Font arialbd;
-	arialbd.loadFromFile("fonts/arialbd.ttf");
+	m_display.setFont(arial);
+	m_display.setWord("Welcome to Speed Reader!");
 
 	sf::RectangleShape mainDisplay(sf::Vector2f(750, 350));
 	mainDisplay.setPosition(25, 25);
@@ -179,21 +180,14 @@ void SpeedReader::loop() {
 	sFont.setPosition({ 75, 250 });
 	sFont.setString("FONT:");
 
-	sf::Font arial;
-	arial.loadFromFile("./fonts/arial.ttf");
 	TextButton sArial("Arial", { 100, 25 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255), sf::Color::Color(0, 0, 0, 200));
 	sArial.setFont(arialbd);
 	sArial.setPosition({ 170, 254 });
 
-	sf::Font times;
-	times.loadFromFile("./fonts/timesbd.ttf");
 	TextButton sTimes("Times New Roman", { 200, 25 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255), sf::Color::Color(0, 0, 0, 200));
 	sTimes.setFont(times);
 	sTimes.setPosition({ 290, 254 });
 
-
-	sf::Font comic;
-	comic.loadFromFile("./fonts/comicbd.ttf");
 	TextButton sComic("Comic Sans MS", { 200, 25 }, sf::Color::Color(248, 249, 250, 255), sf::Color::Color(222, 226, 230, 255), sf::Color::Color(0, 0, 0, 200));
 	sComic.setFont(comic);
 	sComic.setPosition({ 510, 254 });
@@ -512,5 +506,13 @@ void SpeedReader::applySettings() {
 }
 
 void SpeedReader::loadResources() {
+	// DO ERROR HANDLING
+	arial.loadFromFile("fonts/arial.ttf");
+	arialbd.loadFromFile("fonts/arialbd.ttf");
 
+	times.loadFromFile("fonts/times.ttf");
+	timesbd.loadFromFile("fonts/timesbd.ttf");
+
+	comic.loadFromFile("fonts/times.ttf");
+	comicbd.loadFromFile("fonts/comicbd.ttf");
 }

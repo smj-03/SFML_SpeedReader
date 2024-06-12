@@ -38,6 +38,13 @@ private:
 
 	std::wstring m_text;
 
+	sf::Font arial;
+	sf::Font arialbd;
+	sf::Font times;
+	sf::Font timesbd;
+	sf::Font comic;
+	sf::Font comicbd;
+
 	void handleButton(Button& button);
 
 	void handleButton(TextButton& button);

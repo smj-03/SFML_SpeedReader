@@ -20,7 +20,9 @@ public:
 
 	void setCharacterSize(int size);
 
-	void setFont(sf::Font font);
+	void setWord(const std::string& text);
+
+	void setFont(sf::Font& font);
 
 	void pause(sf::Clock& timer);
 
@@ -54,4 +56,5 @@ private:
 	bool _isLoaded;
 
 	void centerText();
+
 };

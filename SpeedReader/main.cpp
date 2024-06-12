@@ -12,6 +12,7 @@ int main() {
 	//ShowWindow(hWnd, SW_HIDE);
 
 	SpeedReader SR;
+	SR.loadResources();
 	SR.loop();
 
 	return 0;
