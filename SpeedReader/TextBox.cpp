@@ -1,7 +1,6 @@
 ﻿#include "TextBox.h"
-#include <iostream>
 
-TextBox::TextBox() {}
+TextBox::TextBox() : m_limit(300) {}
 
 TextBox::TextBox(int size, sf::Color color, bool selected) {
 
@@ -49,7 +48,6 @@ std::wstring TextBox::getText() {
 }
 
 void TextBox::typedOn(sf::Uint16 charTyped) {
-	std::cout << charTyped << std::endl;
 	if (m_isSelected) {
 		if (charTyped < 128 || charTyped > 210) {
 			if (m_hasLimit) {
@@ -169,9 +167,6 @@ void TextBox::inputLogic(int charTyped) {
 		if (m_text.str().length() > 0) {
 			deleteLastChar();
 		}
-	}
-	if (!(m_text.str().length() % 35)) {
-		m_text << L"\n";
 	}
 	m_textbox.setString(m_text.str() + L"_");
 }

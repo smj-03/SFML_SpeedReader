@@ -16,7 +16,7 @@ public:
 
 	bool isMouseOver(sf::RenderWindow& window);
 
-	bool isClicked(sf::RenderWindow& window);
+	bool isClicked(sf::RenderWindow& window, sf::Clock& clock);
 
 protected:
 

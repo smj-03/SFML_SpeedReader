@@ -3,5 +3,5 @@
 enum ProgramState {
 	MainDisplay,
 	LoadText,
-	Settings
+	SettingsMenu
 };
